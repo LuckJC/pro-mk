@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">izin Kontrol</string>
+	<string  name="auto_boot_pref_title">Pengaturan Mulai Aplikasi</string>
+	<string  name="auto_boot_pref_summary">Izinkan atau tidak untuk memulai aplikasi ketika perangkan  Baru di hidupkan</string>
+	<string name="manage_permission_app_label">Izin Aplikasi</string>
+	<string name="manage_permission_summary">Mengatur Izin aplikasi untuk keamanan dan privasi</string>
+	<string name="alert_dlg_title">Matikan Pengamanan?</string>
+	<string name="alert_dlg_mgs">Aplikasi selalu di izinkan  tanpa persetujuan</string>
+	<string name="notify_check_hint">Jangan ingatkan lagi</string>
+   <!-- auto boot part end -->
+</resources>

@@ -168,7 +168,8 @@ CUSTOM_KERNEL_SUB_LENS=dummy_lens
 # touch driver  need to report correct touch axes
 
 
-CUSTOM_KERNEL_TOUCHPANEL=ft5206_watch ##ft5206_p201##sl2682 #GT9XX
+# CUSTOM_KERNEL_TOUCHPANEL=ft5206_watch ##ft5206_p201##sl2682 #GT9XX
+CUSTOM_KERNEL_TOUCHPANEL=ft6x36
 
 # Configuration for USB PHY
 CUSTOM_KERNEL_USB=mt6577

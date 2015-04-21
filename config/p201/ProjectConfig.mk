@@ -181,7 +181,7 @@ CUSTOM_KERNEL_VIBRATOR=vibrator
 
 
 
-CUSTOM_LK_LCM=rm69032_dsi_cmd  ek790161_dsi_vdo
+CUSTOM_LK_LCM=rm69032_dsi_cmd q500_hx8394_khx5001e12_dsi_vdo # ek790161_dsi_vdo hx8394_hd720_dsi_vdo
 #otm8018b_dsi_vdo ili9806e_boe_vdo_p201
 #CUSTOM_LK_LCM=otm8018b_dsi_vdo ili9806e_boe_vdo
 #CUSTOM_LK_LCM=ili9807_xfy otm9605_xfy
@@ -669,7 +669,7 @@ MTK_EAP_SIM_AKA=no
 # no:  disable
 MTK_EMMC_DISCARD=no
 
-# eMMC feature enable/disable
+# huangchao eMMC feature enable/disable
 MTK_EMMC_SUPPORT=yes
 
 # support ont time program on EMMC ,specaily for JRD and MOTO
@@ -996,7 +996,7 @@ MTK_MULTISIM_RINGTONE_SUPPORT=no
 # support to mount multi-partition usb flash driver
 MTK_MULTI_PARTITION_MOUNT_ONLY_SUPPORT=no
 
-# Support more than 1 SD card Path is  \Sdcard and \Sdcard\Sdcard2  One card must be always exist \sdcard,  Some write app can save to one of cards storage. Camera,recorder,browser,BT,ATV,CMMB Mount service  can mount multi-storage Media scan will scan all media in both cards File manager can view all cards Usb mass storage for two card is the same behavior mount/umount at same time Setting provide user to select which card want to write
+# huangchao Support more than 1 SD card Path is  \Sdcard and \Sdcard\Sdcard2  One card must be always exist \sdcard,  Some write app can save to one of cards storage. Camera,recorder,browser,BT,ATV,CMMB Mount service  can mount multi-storage Media scan will scan all media in both cards File manager can view all cards Usb mass storage for two card is the same behavior mount/umount at same time Setting provide user to select which card want to write
 MTK_MULTI_STORAGE_SUPPORT=yes
 
 # Enable or disable the lyric file (.lrc) displaying feature. this feature embedded a frame in Music's playback screen, which loads the LRC file stored on sdcard and scrolls it according to the playback duration.
@@ -1595,20 +1595,20 @@ MTK_HDMI_SUPPORT=no
 BOOT_LOGO=hvga
 
 # To choose kernel LCM driver name
-CUSTOM_KERNEL_LCM=rm69032_dsi_cmd  ek790161_dsi_vdo
+CUSTOM_KERNEL_LCM=rm69032_dsi_cmd q500_hx8394_khx5001e12_dsi_vdo # ek790161_dsi_vdo hx8394_hd720_dsi_vdo
 #otm8018b_dsi_vdo ili9806e_boe_vdo_p201
 
 # To choose uboot LCM driver name
-CUSTOM_UBOOT_LCM=rm69032_dsi_cmd  ek790161_dsi_vdo
+CUSTOM_UBOOT_LCM=rm69032_dsi_cmd q500_hx8394_khx5001e12_dsi_vdo # ek790161_dsi_vdo hx8394_hd720_dsi_vdo
 #otm8018b_dsi_vdo ili9806e_boe_vdo_p201
 
 # To set LCM resolution height size
-#lingjinming 2014 08 27
-LCM_HEIGHT=600
+#lingjinming 2014 08 27	#600
+LCM_HEIGHT=1280 
 
 # To set LCM resolution width size
-#lingjinming 2014 08 27
-LCM_WIDTH=1024
+#lingjinming 2014 08 27	#1024
+LCM_WIDTH=720
 
 # To control resource build. The value would be assigned to PRODUCT_LOCALES under build/target/product/XXX.mk (XXX is each project's name)
 #MTK_PRODUCT_LOCALES=en_US in_ID zh_CN es_ES ru_RU pt_BR fr_FR de_DE tr_TR it_IT ms_MY vi_VN ar_EG  th_TH  pt_PT   nl_NL el_GR hu_HU tl_PH ro_RO cs_CZ iw_IL my_MM km_KH ko_KR pl_PL es_US bg_BG hr_HR lv_LV lt_LT sk_SK uk_UA de_AT da_DK fi_FI nb_NO sv_SE

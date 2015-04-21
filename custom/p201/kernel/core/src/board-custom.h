@@ -7,7 +7,7 @@
 /* MT6575 SD                                                             */
 /*=======================================================================*/
 #define CFG_DEV_MSDC0
-#define CFG_DEV_MSDC1
+//#define CFG_DEV_MSDC1
 //#define CFG_DEV_MSDC2
 //#define CFG_DEV_MSDC3
 //#define CFG_DEV_MSDC4

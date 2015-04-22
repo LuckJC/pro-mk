@@ -114,10 +114,10 @@
 	#define KEY_GESTURE_V 						KEY_V
 	#define KEY_GESTURE_Z 						KEY_Z
         
-        #define KEY_GESTURE_F1                                          KEY_M/*KEY_F1*/
-         #define KEY_GESTURE_F2                                         KEY_C /*KEY_F2*/ 
-       #define KEY_GESTURE_F3                                         KEY_V/*KEY_F3*/
-        #define KEY_GESTURE_F4                                          KEY_L/*KEY_F4*/
+        #define KEY_GESTURE_F1                                         KEY_M /*	V KEY_F1*/
+        #define KEY_GESTURE_F2                                         KEY_N /* < KEY_F2*/ 
+        #define KEY_GESTURE_F3                                         KEY_V /* > KEY_F3*/
+        #define KEY_GESTURE_F4                                         KEY_L /* ^ KEY_F4*/
 
 	/*#define GESTURE_LEFT						0x20
 	#define GESTURE_RIGHT						0x21
@@ -152,7 +152,7 @@
 	#define GESTURE_V		    					0x52
 	#define GESTURE_Z		    					0x47
 
-        #define GESTURE_F1                                                      0x52		/* V */
+	#define GESTURE_F1                                                      0x52		/* V */
         #define GESTURE_F2                                                      0x53		/* < */
         #define GESTURE_F3                                                      0x54		/* > */
         #define GESTURE_F4                                                      0xE8		/* ^ */
@@ -1035,9 +1035,9 @@ static void check_gesture(int gesture_id)
 				input_sync(tpd->dev);
 			break;
 		case GESTURE_DOUBLECLICK:
-				input_report_key(tpd->dev, /*KEY_GESTURE_U*/KEY_POWER, 1);
+				input_report_key(tpd->dev, KEY_GESTURE_U, 1);
 				input_sync(tpd->dev);
-				input_report_key(tpd->dev, /*KEY_GESTURE_U*/KEY_POWER, 0);
+				input_report_key(tpd->dev, KEY_GESTURE_U, 0);
 				input_sync(tpd->dev);
 			break;
 		case GESTURE_O:
@@ -1590,6 +1590,11 @@ void fts_reset_tp(int HighOrLow)
 		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_S); 
 		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_V);
 		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_Z);
+		/* add by huanchao */
+		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_F1);
+		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_F2);
+		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_F3);
+		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_F4);
 			
 		__set_bit(KEY_GESTURE_RIGHT, tpd->dev->keybit);
 		__set_bit(KEY_GESTURE_LEFT, tpd->dev->keybit);
@@ -1604,6 +1609,12 @@ void fts_reset_tp(int HighOrLow)
 		__set_bit(KEY_GESTURE_S, tpd->dev->keybit);
 		__set_bit(KEY_GESTURE_V, tpd->dev->keybit);
 		__set_bit(KEY_GESTURE_Z, tpd->dev->keybit);
+		/* add by huanchao */
+		__set_bit(KEY_GESTURE_F1, tpd->dev->keybit);
+		__set_bit(KEY_GESTURE_F2, tpd->dev->keybit);
+		__set_bit(KEY_GESTURE_F3, tpd->dev->keybit);
+		__set_bit(KEY_GESTURE_F4, tpd->dev->keybit);
+
 	#endif
 
 	#ifdef MT_PROTOCOL_B

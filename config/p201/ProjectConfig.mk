@@ -669,7 +669,7 @@ MTK_EAP_SIM_AKA=no
 # no:  disable
 MTK_EMMC_DISCARD=no
 
-# huangchao eMMC feature enable/disable
+# eMMC feature enable/disable
 MTK_EMMC_SUPPORT=yes
 
 # support ont time program on EMMC ,specaily for JRD and MOTO
@@ -996,7 +996,7 @@ MTK_MULTISIM_RINGTONE_SUPPORT=no
 # support to mount multi-partition usb flash driver
 MTK_MULTI_PARTITION_MOUNT_ONLY_SUPPORT=no
 
-# huangchao Support more than 1 SD card Path is  \Sdcard and \Sdcard\Sdcard2  One card must be always exist \sdcard,  Some write app can save to one of cards storage. Camera,recorder,browser,BT,ATV,CMMB Mount service  can mount multi-storage Media scan will scan all media in both cards File manager can view all cards Usb mass storage for two card is the same behavior mount/umount at same time Setting provide user to select which card want to write
+# Support more than 1 SD card Path is  \Sdcard and \Sdcard\Sdcard2  One card must be always exist \sdcard,  Some write app can save to one of cards storage. Camera,recorder,browser,BT,ATV,CMMB Mount service  can mount multi-storage Media scan will scan all media in both cards File manager can view all cards Usb mass storage for two card is the same behavior mount/umount at same time Setting provide user to select which card want to write
 MTK_MULTI_STORAGE_SUPPORT=yes
 
 # Enable or disable the lyric file (.lrc) displaying feature. this feature embedded a frame in Music's playback screen, which loads the LRC file stored on sdcard and scrolls it according to the playback duration.

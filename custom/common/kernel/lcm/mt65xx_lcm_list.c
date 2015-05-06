@@ -155,11 +155,11 @@ extern  LCM_DRIVER ek790161_dsi_vdo_lcm_drv;
 #endif
 
 LCM_DRIVER* lcm_driver_list[] = 
-{	
+{
 #if defined(Q500_HX8394_KHX5001E12_DSI_VDO)	/*huangchao@shizhongkeji.com*/
 	&q500_hx8394_khx5001e12_dsi_vdo_lcm_drv,
 #endif
-
+			
 #if defined(HX8394_HD720_DSI_VDO)	/*huangchao@shizhongkeji.com*/
 	&hx8394_hd720_dsi_vdo_lcm_drv,
 #endif

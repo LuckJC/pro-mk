@@ -82,6 +82,9 @@ CUSTOM_HAL_SUB_IMGSENSOR=
 # lens driver config for video telephony camera
 CUSTOM_HAL_SUB_LENS=dummy_lens
 
+# lcd switch
+#CUSTOM_KERNEL_EXTEND=switch
+
 # accelerometer sensor to detect accelerometer from x y z axis.
 CUSTOM_KERNEL_ACCELEROMETER=
 #bma222E_auto mir3da_auto
@@ -170,6 +173,7 @@ CUSTOM_KERNEL_SUB_LENS=dummy_lens
 
 # CUSTOM_KERNEL_TOUCHPANEL=ft5206_watch ##ft5206_p201##sl2682 #GT9XX
 CUSTOM_KERNEL_TOUCHPANEL=ft6x36
+#CUSTOM_KERNEL_TOUCHPANEL=ft6x36b
 
 # Configuration for USB PHY
 CUSTOM_KERNEL_USB=mt6577
@@ -181,7 +185,7 @@ CUSTOM_KERNEL_VIBRATOR=vibrator
 
 
 
-CUSTOM_LK_LCM=rm69032_dsi_cmd q500_hx8394_khx5001e12_dsi_vdo # ek790161_dsi_vdo hx8394_hd720_dsi_vdo
+CUSTOM_LK_LCM=hx8394_hd720_dsi_vdo rm69032_dsi_cmd q500_hx8394_khx5001e12_dsi_vdo # ek790161_dsi_vdo 
 #otm8018b_dsi_vdo ili9806e_boe_vdo_p201
 #CUSTOM_LK_LCM=otm8018b_dsi_vdo ili9806e_boe_vdo
 #CUSTOM_LK_LCM=ili9807_xfy otm9605_xfy
@@ -1592,23 +1596,24 @@ MTK_HDMI_SUPPORT=no
 #lingjinming 2014 08 27
 #BOOT_LOGO=qhd
 
-BOOT_LOGO=hvga
+BOOT_LOGO=cmcc_hd720
+#BOOT_LOGO=fwvga	#850x480
 
 # To choose kernel LCM driver name
-CUSTOM_KERNEL_LCM=rm69032_dsi_cmd q500_hx8394_khx5001e12_dsi_vdo # ek790161_dsi_vdo hx8394_hd720_dsi_vdo
+CUSTOM_KERNEL_LCM=hx8394_hd720_dsi_vdo rm69032_dsi_cmd q500_hx8394_khx5001e12_dsi_vdo # ek790161_dsi_vdo 
 #otm8018b_dsi_vdo ili9806e_boe_vdo_p201
 
 # To choose uboot LCM driver name
-CUSTOM_UBOOT_LCM=rm69032_dsi_cmd q500_hx8394_khx5001e12_dsi_vdo # ek790161_dsi_vdo hx8394_hd720_dsi_vdo
+CUSTOM_UBOOT_LCM=hx8394_hd720_dsi_vdo rm69032_dsi_cmd q500_hx8394_khx5001e12_dsi_vdo # ek790161_dsi_vdo 
 #otm8018b_dsi_vdo ili9806e_boe_vdo_p201
 
 # To set LCM resolution height size
 #lingjinming 2014 08 27	#600
-LCM_HEIGHT=1280 
+LCM_HEIGHT=850 
 
 # To set LCM resolution width size
 #lingjinming 2014 08 27	#1024
-LCM_WIDTH=720
+LCM_WIDTH=480
 
 # To control resource build. The value would be assigned to PRODUCT_LOCALES under build/target/product/XXX.mk (XXX is each project's name)
 #MTK_PRODUCT_LOCALES=en_US in_ID zh_CN es_ES ru_RU pt_BR fr_FR de_DE tr_TR it_IT ms_MY vi_VN ar_EG  th_TH  pt_PT   nl_NL el_GR hu_HU tl_PH ro_RO cs_CZ iw_IL my_MM km_KH ko_KR pl_PL es_US bg_BG hr_HR lv_LV lt_LT sk_SK uk_UA de_AT da_DK fi_FI nb_NO sv_SE

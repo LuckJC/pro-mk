@@ -23,7 +23,7 @@
 #define FRAME_WIDTH  										(720)
 #define FRAME_HEIGHT 										(1280)
 
-#define REGFLAG_DELAY             							0XFE
+#define REGFLAG_DELAY             								0XFE
 #define REGFLAG_END_OF_TABLE      							0xFFF   // END OF REGISTERS MARKER
 
 //#define LCM_ID_HX8394D        0x94 
@@ -191,8 +191,8 @@ static void lcm_get_params(LCM_PARAMS *params)
 
 		params->type   = LCM_TYPE_DSI;
 
-		params->width  = FRAME_WIDTH;
-		params->height = FRAME_HEIGHT;
+		params->width  = FRAME_WIDTH;//480;
+		params->height = FRAME_HEIGHT;//850;
 
 		// enable tearing-free
 		params->dbi.te_mode 				= LCM_DBI_TE_MODE_VSYNC_ONLY;
@@ -223,26 +223,16 @@ static void lcm_get_params(LCM_PARAMS *params)
 
 		params->dsi.PS=LCM_PACKED_PS_24BIT_RGB888;
 
-	#if 0
-	       params->dsi.vertical_sync_active				= 5;
-		params->dsi.vertical_backporch					= 13;
-		params->dsi.vertical_frontporch					= 13;
+		params->dsi.vertical_sync_active				= 3;
+		params->dsi.vertical_backporch				= 13;
+		params->dsi.vertical_frontporch				= 13;
 		params->dsi.vertical_active_line				= FRAME_HEIGHT;
 
 		params->dsi.horizontal_sync_active				= 32;
 		params->dsi.horizontal_backporch				= 80;
 		params->dsi.horizontal_frontporch				= 80;
 		params->dsi.horizontal_active_pixel				= FRAME_WIDTH;
-#endif
-		params->dsi.vertical_sync_active				= 0x05;// 3    2
-		params->dsi.vertical_backporch					= 0x0d;// 20   1
-		params->dsi.vertical_frontporch					= 0x08; // 1  12
-		params->dsi.vertical_active_line				= FRAME_HEIGHT; 
 
-		params->dsi.horizontal_sync_active				= 0x12;// 50  2
-		params->dsi.horizontal_backporch				= 0x5f;
-		params->dsi.horizontal_frontporch				= 0x5f;
-		params->dsi.horizontal_active_pixel				= FRAME_WIDTH;
 #if 0
 		// Bit rate calculation
 		params->dsi.pll_div1=29;		// fref=26MHz, fvco=fref*(div1+1)	(div1=0~63, fvco=500MHZ~1GHz)
@@ -252,15 +242,17 @@ static void lcm_get_params(LCM_PARAMS *params)
 		//1 Every lane speed
 		//params->dsi.pll_select=1;
 		//params->dsi.PLL_CLOCK  = LCM_DSI_6589_PLL_CLOCK_377;
+		
 		//params->dsi.PLL_CLOCK=228;
 		params->dsi.pll_div1=1;		// div1=0,1,2,3;div1_real=1,2,4,4 ----0: 546Mbps  1:273Mbps
 		params->dsi.pll_div2=0;		// div2=0,1,2,3;div1_real=1,2,4,4
 #if (LCM_DSI_CMD_MODE)
 		params->dsi.fbk_div =9;
 #else
-		params->dsi.fbk_div =16;    // fref=26MHz, fvco=fref*(fbk_div+1)*2/(div1_real*div2_real)
+		params->dsi.fbk_div = 16;    // fref=26MHz, fvco=fref*(fbk_div+1)*2/(div1_real*div2_real)
 #endif
 #endif
+
 		/* ESD or noise interference recovery For video mode LCM only. */ // Send TE packet to LCM in a period of n frames and check the response.
 		params->dsi.lcm_int_te_monitor = FALSE;
 		params->dsi.lcm_int_te_period = 1; // Unit : frames
@@ -414,6 +406,7 @@ static void init_lcd_set()
 	dsi_set_cmdq(&data_array, 1, 1); 
 	MDELAY(10);
 #endif
+
 #if 0
 	data_array[0]=0x00043902;//Enable external Command 
 	data_array[1]=0x9483FFB9; 
@@ -653,7 +646,7 @@ static void init_lcd_set()
 	dsi_set_cmdq(&data_array, 13, 1);
 	MDELAY(10);
 	data_array[0]=0x00023902;
-	data_array[1]=0x000001cc;
+	data_array[1]=0x000009cc;
 	dsi_set_cmdq(&data_array, 2, 1);
 	MDELAY(10); 
 	data_array[0]=0x00033902;
@@ -708,11 +701,6 @@ static void lcm_init(void)
     SET_RESET_PIN(1);
     MDELAY(150);
 #else
-	#if defined(BUILD_LK)
-	printf("------------------lcm_init\n");
-	#endif
-
-	mt_set_gpio_out(GPIO126,1);
 	mt_set_gpio_out(GPIO119,1);
 	MDELAY(20); 
 	//SET_RESET_PIN(0);
@@ -739,11 +727,6 @@ static void lcm_suspend(void)
 	SET_RESET_PIN(1);
 	MDELAY(150);
 #else
-	#if defined(BUILD_LK)
-	printf("------------------lcm_suspend\n");
-	#endif
-	//printk(0, "------------------lcm_suspend\n");
-	mt_set_gpio_out(GPIO126,1);
 	mt_set_gpio_out(GPIO119,1);
 	MDELAY(20); 
 	//SET_RESET_PIN(0);
@@ -758,10 +741,6 @@ static void lcm_suspend(void)
 
 static void lcm_resume(void)
 {
-#if defined(BUILD_LK)
-	printf("------------------lcm_resume\n");
-#endif
-	mt_set_gpio_out(GPIO126,1);
 	lcm_init();
 }
 
@@ -802,12 +781,9 @@ static unsigned int lcm_compare_id(void)
 #else
 	unsigned int ret = 0;
 
-	
-
 	ret = mt_get_gpio_in(GPIO17);
 #if defined(BUILD_LK)
-	printf("%s, [jx]hx8394a GPIO17 = %d \n", __func__, ret);
-	printf("------------------lcm_compare_id\n");
+	printf("%s, [jx]hx8394a GPIO92 = %d \n", __func__, ret);
 #endif	
 
       if(ret == 1)
@@ -818,12 +794,10 @@ static unsigned int lcm_compare_id(void)
 	    mt_set_gpio_out(GPIO126,0);
 	 }
 
-	//mt_set_gpio_mode(GPIO126, GPIO_MODE_00);
-    	//mt_set_gpio_dir(GPIO126, GPIO_DIR_OUT);
 	//mt_set_gpio_out(GPIO126,1);
+	//return 1;
 
 	return (ret == 1)?1:0; 
-	//return 1; 
 #endif
 }
 
@@ -842,7 +816,6 @@ LCM_DRIVER q500_hx8394_khx5001e12_dsi_vdo_lcm_drv =
        .update         = lcm_update,
 #endif
 };
-
 
 
 

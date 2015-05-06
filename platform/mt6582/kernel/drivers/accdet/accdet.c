@@ -500,6 +500,14 @@ static inline int accdet_setup_eint(void)
 }
 
 #endif//endif ACCDET_EINT
+/*
+static void accdet_eint_funcEx2(void)
+{
+	if(mt_get_gpio_in(GPIO114) == 0)
+	{
+		mt_set_gpio_out(GPIO20,0);
+	}
+}*/
 
 
 static void accdet_eint_funcEx(void)
@@ -516,6 +524,13 @@ static void accdet_eint_funcEx(void)
 	    mt_set_gpio_out(GPIO20,0);
      	}
 
+	/* huangchao ×¢²áÊÕÏßÖÐ¶ÏGPIO114 */
+	//mt_eint_set_hw_debounce(CUST_EINT_ACCDET_NUM, CUST_EINT_ACCDET_DEBOUNCE_CN);
+	//mt_eint_registration(CUST_EINT_ACCDET_NUM, CUST_EINT_ACCDET_TYPE, accdet_eint_funcEx2, 0);
+	//ACCDET_DEBUG("[Accdet]accdet set EINT2 finished, accdet_eint_num=%d, accdet_eint_debounce_en=%d, accdet_eint_polarity=%d\n", CUST_EINT_ACCDET_NUM, CUST_EINT_ACCDET_DEBOUNCE_EN, CUST_EINT_ACCDET_TYPE);
+    
+	
+	//mt_eint_unmask(CUST_EINT_ACCDET_NUM); 
  //     if(mt_get_gpio_in(GPIO_ACCDET_EINT_PIN) == 1)
   //        { 
  //             mt_eint_set_polarity(CUST_EINT_ACCDET_NUM, (0));
@@ -1670,7 +1685,6 @@ int mt_accdet_probe(void)
 		mt_set_gpio_pull_select(GPIO20, GPIO_PULL_UP);
 
 	       mt_set_gpio_out(GPIO20,0);
-
 
               accdet_setup_eintEx();
 	   

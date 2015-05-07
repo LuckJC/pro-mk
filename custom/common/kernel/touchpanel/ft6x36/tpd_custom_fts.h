@@ -92,7 +92,6 @@ extern void fts_reset_tp(int HighOrLow);
 #define TPD_KEY_COUNT           				3    				//  4
 #define TPD_KEYS                					{ KEY_MENU, KEY_HOMEPAGE, KEY_BACK}
 #define TPD_KEYS_DIM            					{{80,370,80,TPD_BUTTON_HEIGH},{160,370,80,TPD_BUTTON_HEIGH},{240,370,80,TPD_BUTTON_HEIGH}}
-#define TPD_KEYS_DIM2            					{{120, 1270,10,10},{360,1270,10,10},{600,1270,10,10}}
 
 /*********************Custom Define end*************************************************/
 

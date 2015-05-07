@@ -1556,7 +1556,7 @@ void fts_reset_tp(int HighOrLow)
 
 	return ret;
 }
-
+#if 0
 static struct timer_list s_timer; 
 
 static void second_handler(unsigned long arg)
@@ -1596,6 +1596,7 @@ static void second_handler(unsigned long arg)
 	printk("----------------------switch_eint_interrupt_handler--------------------------\n");
 	mt_eint_unmask(CUST_EINT_SWITCH_NUM);
  }
+ #endif
 
 /************************************************************************
 * Name: tpd_probe
@@ -1835,6 +1836,7 @@ static void second_handler(unsigned long arg)
 	#endif
 
 	/* switch screen */
+	#if 0
 	input_set_capability(tpd->dev, EV_KEY, KEY_POWER);
 	
 	mt_set_gpio_dir(GPIO_EXPAND_SWITCH_PIN, GPIO_DIR_IN);
@@ -1851,6 +1853,7 @@ static void second_handler(unsigned long arg)
 	//s_timer.data = (unsigned long)second_devp;
 	//s_timer.expires = jiffies + HZ;
 	add_timer(&s_timer);
+	#endif
 	
    	printk("fts Touch Panel Device Probe %s\n", (retval < TPD_OK) ? "FAIL" : "PASS");
    	return 0;
@@ -1882,7 +1885,7 @@ static void second_handler(unsigned long arg)
      		fts_release_apk_debug_channel();
      #endif
 
-	 del_timer(&s_timer);
+	 //del_timer(&s_timer);
 
 	 TPD_DEBUG("TPD removed\n");
  

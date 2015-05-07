@@ -1581,6 +1581,47 @@ void fts_reset_tp(int HighOrLow)
 
 	return 0;
 }
+
+static struct timer_list s_timer; 
+
+static void second_handler(unsigned long arg)
+{
+	(void)arg;
+	
+	//unsigned int ret;
+	//ret = mt_get_gpio_in(GPIO_EXPAND_SWITCH_PIN);
+
+	printk("----------------------second_handler--------------------------\n");
+	
+	// if(ret == 1)
+	 {
+		input_report_key(tpd->dev, KEY_POWER, 1);
+		input_sync(tpd->dev);
+		input_report_key(tpd->dev, KEY_POWER, 0);
+		input_sync(tpd->dev);
+	 }
+	 /*else
+	 {
+	 	input_report_key(tpd->dev, KEY_POWER, 1);
+		input_sync(tpd->dev);
+	 	input_report_key(tpd->dev, KEY_POWER, 0);
+		input_sync(tpd->dev);
+	 }*/
+}
+
+ static void switch_eint_interrupt_handler(void)
+ {
+	mt_eint_mask(CUST_EINT_SWITCH_NUM);
+
+	printk("switch_eint_interrupt_handler\n");
+	//tpd_flag = 1;
+
+	mod_timer(&s_timer, jiffies + HZ);
+	//wake_up_interruptible(&waiter);
+	printk("----------------------switch_eint_interrupt_handler--------------------------\n");
+	mt_eint_unmask(CUST_EINT_SWITCH_NUM);
+ }
+
 /************************************************************************
 * Name: tpd_probe
 * Brief: driver entrance function for initial/power on/create channel 
@@ -1741,6 +1782,24 @@ void fts_reset_tp(int HighOrLow)
 		input_set_abs_params(tpd->dev, ABS_MT_POSITION_Y, 0, tcp_res_y, 0, 0);
 		input_set_abs_params(tpd->dev, ABS_MT_PRESSURE, 0, 255, 0, 0);
 	#endif
+
+	/* switch screen */
+	input_set_capability(tpd->dev, EV_KEY, KEY_POWER);
+	
+	mt_set_gpio_dir(GPIO_EXPAND_SWITCH_PIN, GPIO_DIR_IN);
+    	mt_set_gpio_pull_enable(GPIO_EXPAND_SWITCH_PIN, GPIO_PULL_DISABLE);
+	mt_set_gpio_mode(GPIO_EXPAND_SWITCH_PIN, GPIO_MODE_00);
+	
+	TPD_DEBUG("mt_eint_registration for switch.\n");
+	mt_eint_registration(CUST_EINT_SWITCH_NUM, CUST_EINTF_TRIGGER_RISING | CUST_EINTF_TRIGGER_FALLING, switch_eint_interrupt_handler, 1);
+    	mt_eint_unmask(CUST_EINT_SWITCH_NUM);
+	TPD_DEBUG("mt_eint_registration for switch ok.\n");
+
+	init_timer(&s_timer);
+	s_timer.function = second_handler;
+	//s_timer.data = (unsigned long)second_devp;
+	//s_timer.expires = jiffies + HZ;
+	add_timer(&s_timer);
 	
    	TPD_DEBUG("fts Touch Panel Device Probe %s\n", (retval < TPD_OK) ? "FAIL" : "PASS");
    	return 0;
@@ -1771,6 +1830,8 @@ void fts_reset_tp(int HighOrLow)
      #ifdef FTS_APK_DEBUG
      		fts_release_apk_debug_channel();
      #endif
+
+	 del_timer(&s_timer);
 
 	 TPD_DEBUG("TPD removed\n");
  

@@ -1835,7 +1835,7 @@ static void second_handler(unsigned long arg)
      		fts_release_apk_debug_channel();
      #endif
 
-	 del_timer(&s_timer);
+	 //del_timer(&s_timer);
 
 	 TPD_DEBUG("TPD removed\n");
  

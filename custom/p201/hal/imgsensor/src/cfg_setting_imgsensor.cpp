@@ -10,8 +10,8 @@ namespace NSCamCustomSensor {
 SensorOrientation_T const&
 getSensorOrientation()
 {
-    static SensorOrientation_T const inst = {
-        u4Degree_0  : 90,   //  main sensor in degree (0, 90, 180, 270)
+    static SensorOrientation_T const inst = {	 // p201kk2\mediatek\custom\p201\hal\imgsensor\src\cfg_setting_imgsensor.cpp
+        u4Degree_0  : 180,//90,   //  main sensor in degree (0, 90, 180, 270)
         u4Degree_1  : 270,    //  sub  sensor in degree (0, 90, 180, 270)
         u4Degree_2  : 90,   //  main2 sensor in degree (0, 90, 180, 270) 
     };

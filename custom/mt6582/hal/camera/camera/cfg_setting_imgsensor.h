@@ -8,7 +8,7 @@
 SensorOrientation_T const&
 getSensorOrientation()
 {
-    static SensorOrientation_T const inst = {
+    static SensorOrientation_T const inst = { // p201kk2\mediatek\custom\mt6582\hal\imgsensor\src\cfg_setting_imgsensor.h
         u4Degree_0  : 90,   //  main sensor in degree (0, 90, 180, 270)
         u4Degree_1  : 0,    //  sub  sensor in degree (0, 90, 180, 270)
         u4Degree_2  : 90,   //  main2 sensor in degree (0, 90, 180, 270) 

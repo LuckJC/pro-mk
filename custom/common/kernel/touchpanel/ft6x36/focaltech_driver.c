@@ -716,6 +716,9 @@ void fts_get_upgrade_array(void)
 	}
 		
 	printk("%s chip_id = %x\n", __func__, chip_id);
+	/* huangchao test */
+	if(id == 0 && chip_id != 0x36)
+		chip_id = 0x36;
 
 	for(i=0;i<sizeof(fts_updateinfo)/sizeof(struct Upgrade_Info);i++)
 	{
@@ -1835,7 +1838,7 @@ static void second_handler(unsigned long arg)
      		fts_release_apk_debug_channel();
      #endif
 
-	 del_timer(&s_timer);
+	 //del_timer(&s_timer);
 
 	 TPD_DEBUG("TPD removed\n");
  

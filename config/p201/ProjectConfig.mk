@@ -1593,6 +1593,7 @@ MTK_HDMI_SUPPORT=no
 #BOOT_LOGO=qhd
 
 BOOT_LOGO=hvga
+#BOOT_LOGO=cmcc_hd720
 
 # To choose kernel LCM driver name
 CUSTOM_KERNEL_LCM=rm69032_dsi_cmd q500_hx8394_khx5001e12_dsi_vdo # ek790161_dsi_vdo hx8394_hd720_dsi_vdo

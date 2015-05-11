@@ -32,7 +32,7 @@ int apk_debug_flag = 0;
 
 struct i2c_client *G_Client;
 static unsigned char CTPM_FW[] = {
-	#include "Shizhong_Watch_ID59_V04_20150508_app.i"
+	#include "Shizhong_Watch_ID59_V03_20150428_app.i"
 };
 //kernel 3.10
 //struct i2c_client *G_Client;
@@ -517,9 +517,8 @@ int fts_6x36_ctpm_fw_upgrade(struct i2c_client *client, u8 *pbt_buf,u32 dw_lenth
 				reg_val[0], reg_val[1]);
 		}
 	}
-	DBG("strong upgrade\n");
-	/*if (i >= FTS_UPGRADE_LOOP)
-		return -EIO;*/
+	if (i >= FTS_UPGRADE_LOOP)
+		return -EIO;
 
 	auc_i2c_write_buf[0] = 0x90;
 	auc_i2c_write_buf[1] = 0x00;
@@ -2178,68 +2177,8 @@ static ssize_t fts_fwupgradeapp_show(struct device *dev,
 					struct device_attribute *attr,
 					char *buf)
 {
-	u8 reg_val[2] = {0};
-	u8 auc_i2c_write_buf[10];
-	char *ptr;
-	
 	/*place holder for future use*/
-	struct i2c_client *client = container_of(dev, struct i2c_client, dev);
-
-	mutex_lock(&g_device_mutex);
-	disable_irq(client->irq);
-	apk_debug_flag = 1;
-	
-	/* print fw information */
-	ptr = buf;
-	sprintf(ptr, "CHIP_ID			= 0x%02x\n", fts_updateinfo_curr.CHIP_ID);
-	ptr = buf + strlen(buf);
-	sprintf(ptr, "FTS_NAME		= %s\n", fts_updateinfo_curr.FTS_NAME);
-	ptr = buf + strlen(buf);
-	sprintf(ptr, "upgrade_id_1		= 0x%02x\n", fts_updateinfo_curr.upgrade_id_1);
-	ptr = buf + strlen(buf);
-	sprintf(ptr, "upgrade_id_2		= 0x%02x\n", fts_updateinfo_curr.upgrade_id_2);
-	ptr = buf + strlen(buf);
-
-	/*********Step 1:Reset  CTPM *****/
-	/*write 0xaa to register 0xbc */	
-	fts_write_reg(client, 0xbc, FTS_UPGRADE_AA);
-	msleep(fts_updateinfo_curr.delay_aa);
-
-	/*write 0x55 to register 0xbc */
-	fts_write_reg(client, 0xbc, FTS_UPGRADE_55);
-	msleep(fts_updateinfo_curr.delay_55);
-
-	/*********Step 2:Enter upgrade mode *****/
-	auc_i2c_write_buf[0] = FTS_UPGRADE_55;
-	fts_i2c_Write(client, auc_i2c_write_buf, 1);
-
-	auc_i2c_write_buf[0] = FTS_UPGRADE_AA;
-	fts_i2c_Write(client, auc_i2c_write_buf, 1);
-	msleep(fts_updateinfo_curr.delay_readid);
-
-	/*********Step 3:check READ-ID***********************/		
-	auc_i2c_write_buf[0] = 0x90;
-	auc_i2c_write_buf[1] = auc_i2c_write_buf[2] = auc_i2c_write_buf[3] =0x00;
-	reg_val[0] = 0x00;
-	reg_val[1] = 0x00;
-	fts_i2c_Read(client, auc_i2c_write_buf, 4, reg_val, 2);
-
-	sprintf(ptr, "id_1		= 0x%02x\n", reg_val[0]);
-	ptr = buf + strlen(buf);
-	sprintf(ptr, "id_2		= 0x%02x\n", reg_val[1]);
-	ptr = buf + strlen(buf);
-
-	/*********Step 7: reset the new FW***********************/
-	auc_i2c_write_buf[0] = 0x07;
-	fts_i2c_Write(client, auc_i2c_write_buf, 1);
-	msleep(300);	/*make sure CTP startup normally */
-	
-	apk_debug_flag = 0;
-	enable_irq(client->irq);
-	mutex_unlock(&g_device_mutex);
-	
-	//return -EPERM;
-	return strlen(buf) + 1;
+	return -EPERM;
 }
 
 

@@ -578,15 +578,22 @@ static void lcm_setbacklight(unsigned int level)
 
 	//for LGE backlight IC mapping table
 	if(level > 255) 
-			level = 255;
+		level = 255;
 
 	if(level >0) 
-			mapped_level = default_level+(level)*(255-default_level)/(255);
+		mapped_level = default_level+(level)*(255-default_level)/(255);
 	else
-			mapped_level=0;
+		mapped_level=0;
 
 	// Refresh value of backlight level.
 	lcm_backlight_level_setting[1].para_list[0] = mapped_level;
+
+#if defined(BUILD_LK)
+	printf("%s, [lcm]rm69032 level = %d, mapped_level = %d \n", __func__, level, mapped_level);
+#else
+	printk("%s, [lcm]rm69032 level = %d, mapped_level = %d \n", __func__, level, mapped_level);
+#endif	
+
 
 	push_table(lcm_backlight_level_setting, sizeof(lcm_backlight_level_setting) / sizeof(struct LCM_setting_table), 1);
 }
@@ -601,9 +608,8 @@ LCM_DRIVER rm69032_dsi_cmd_drv =
 	.suspend        = lcm_suspend,
 	.resume         = lcm_resume,
 	.set_backlight	= lcm_setbacklight,
-	.compare_id     	= lcm_compare_id
+	.compare_id     	= lcm_compare_id,
 #if defined(LCM_DSI_CMD_MODE)
-        ,
-        .update         = lcm_update
+        .update         = lcm_update,
 #endif
 };

@@ -941,7 +941,7 @@ static int fts_report_value(struct ts_event *data)
 			 input_report_abs(tpd->dev, ABS_MT_PRESSURE,data->pressure[i]/*0x3f*/);
 			 input_report_abs(tpd->dev, ABS_MT_TOUCH_MAJOR,data->area[i]/*0x05*/);
 			 if(touch_id == 1)
-				data->au16_x[i] == 720 - data->au16_x[i];
+				data->au16_x[i] = 720 - data->au16_x[i];
 			 input_report_abs(tpd->dev, ABS_MT_POSITION_X,data->au16_x[i]);
 			 input_report_abs(tpd->dev, ABS_MT_POSITION_Y,data->au16_y[i]);
 			 touchs |= BIT(data->au8_finger_id[i]);

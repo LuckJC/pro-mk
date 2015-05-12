@@ -44,7 +44,7 @@
 //#define MT_PROTOCOL_B
 //#define TPD_PROXIMITY
 #define FTS_GESTRUE
-//#define TPD_AUTO_UPGRADE
+#define TPD_AUTO_UPGRADE
 #define TPD_HAVE_BUTTON
 
 #define FTS_CTL_IIC
@@ -1805,8 +1805,11 @@ static void second_handler(unsigned long arg)
 	#endif
 	
 	#ifdef TPD_AUTO_UPGRADE
-		printk("********************Enter CTP Auto Upgrade********************\n");
-		fts_ctpm_auto_upgrade(i2c_client);
+		if(touch_id == 0)
+		{
+			printk("********************Enter CTP Auto Upgrade********************\n");
+			fts_ctpm_auto_upgrade(i2c_client);
+		}
 	#endif
 
 	#ifdef TPD_PROXIMITY

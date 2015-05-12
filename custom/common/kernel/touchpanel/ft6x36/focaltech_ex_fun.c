@@ -31,8 +31,9 @@ int hid_to_i2c(struct i2c_client * client);
 int apk_debug_flag = 0; 
 
 struct i2c_client *G_Client;
+/* modify by huangchao */
 static unsigned char CTPM_FW[] = {
-	#include "Shizhong_Watch_ID59_V03_20150428_app.i"
+	#include "Shizhong_Watch_ID59_V05_20150512_app.i"
 };
 //kernel 3.10
 //struct i2c_client *G_Client;

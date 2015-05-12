@@ -653,7 +653,7 @@ static void init_lcd_set()
 	dsi_set_cmdq(&data_array, 13, 1);
 	MDELAY(10);
 	data_array[0]=0x00023902;
-	data_array[1]=0x000001cc;
+	data_array[1]=0x000009cc;
 	dsi_set_cmdq(&data_array, 2, 1);
 	MDELAY(10); 
 	data_array[0]=0x00033902;

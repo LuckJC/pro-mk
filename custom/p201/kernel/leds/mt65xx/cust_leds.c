@@ -11,6 +11,8 @@
 #include <mach/upmu_hw.h>
 
 extern int disp_bls_set_backlight(unsigned int level);
+extern int mtkfb_set_backlight_level(unsigned int level);
+extern UINT32 DISP_GetScreenWidth(void);
 
 // Only support 64 levels of backlight (when lcd-backlight = MT65XX_LED_MODE_PWM)
 #define BACKLIGHT_LEVEL_PWM_64_FIFO_MODE_SUPPORT 64 
@@ -33,6 +35,27 @@ unsigned int brightness_mapping(unsigned int level)
        
 	return mapped_level;
 }
+
+unsigned int Cust_SetBacklight(int level)
+{
+	int ret;
+	unsigned int  w;
+
+	w = DISP_GetScreenWidth();
+#if defined(BUILD_LK)
+	printf("Cust_SetBacklight Screen Width : %d\n", w);
+#else
+	printk("Cust_SetBacklight Screen Width: %d\n", w);
+#endif
+	
+	if(w == 320)
+		ret = mtkfb_set_backlight_level(level);
+	else if(w == 720)
+		ret = disp_bls_set_backlight(level);
+
+	return ret;
+}
+
 /*
 unsigned int Cust_SetBacklight(int level, int div)
 {
@@ -118,7 +141,8 @@ static struct cust_mt65xx_led cust_led_list[MT65XX_LED_TYPE_TOTAL] = {
 	{"jogball-backlight", MT65XX_LED_MODE_NONE, -1,{0}},
 	{"keyboard-backlight",MT65XX_LED_MODE_NONE, -1,{0}},
 	{"button-backlight",  MT65XX_LED_MODE_PMIC, MT65XX_LED_PMIC_NLED_ISINK3,{0}},
-	{"lcd-backlight",     MT65XX_LED_MODE_CUST_BLS_PWM, (int)disp_bls_set_backlight,{0}},
+	//{"lcd-backlight",     MT65XX_LED_MODE_CUST_BLS_PWM, (int)disp_bls_set_backlight,{0}},
+	{"lcd-backlight",     MT65XX_LED_MODE_CUST_LCM, (int) Cust_SetBacklight,{0}},
 };
 
 struct cust_mt65xx_led *get_cust_led_list(void)

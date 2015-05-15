@@ -595,7 +595,7 @@ static void lcm_setbacklight(unsigned int level)
 #endif	
 
 
-	push_table(lcm_backlight_level_setting, sizeof(lcm_backlight_level_setting) / sizeof(struct LCM_setting_table), 1);
+	//push_table(lcm_backlight_level_setting, sizeof(lcm_backlight_level_setting) / sizeof(struct LCM_setting_table), 1);
 }
 
 

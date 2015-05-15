@@ -144,7 +144,7 @@ static struct LCM_setting_table lcm_set_window[] = {
 
 static struct LCM_setting_table lcm_backlight_level_setting[] = {
 	{0xF0,	5,	{0x55, 0xAA, 0x52, 0x08, 0x01}},
-	{0xCF,    7,    {0xFF, 0xD4, 0x95, 0xEF, 0x4F, 0x00, 0x04}},
+	{0xCF,    7,    {0xFF, 0xD4, 0x95, 0xE8, 0x4F, 0x00, 0x04}},
 	{REGFLAG_END_OF_TABLE, 0x00, {}}
 };
 
@@ -595,7 +595,7 @@ static void lcm_setbacklight(unsigned int level)
 #endif	
 
 
-	//push_table(lcm_backlight_level_setting, sizeof(lcm_backlight_level_setting) / sizeof(struct LCM_setting_table), 1);
+	push_table(lcm_backlight_level_setting, sizeof(lcm_backlight_level_setting) / sizeof(struct LCM_setting_table), 1);
 }
 
 

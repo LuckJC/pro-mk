@@ -661,7 +661,7 @@ void platform_init(void)
     time_sw_env= get_timer(0);
 #endif
 
-    sw_env();
+    //sw_env();
 
 #ifdef LK_PROFILING
     printf("[PROFILE] ------- sw_env takes %d ms -------- \n", get_timer(time_sw_env));

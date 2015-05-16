@@ -98,7 +98,7 @@ void init_fb_screen()
     
     /* In GB, no need to adjust 180 showing logo ,for fb driver dealing the change */
     /* but in JB, need adjust it for screen 180 roration           */
-    phical_screen.need180Adjust = 0;   // need sync with chip driver 
+    phical_screen.need180Adjust = 1;   // need sync with chip driver 
     
     dprintf(INFO, "[lk logo: %s %d]MTK_LCM_PHYSICAL_ROTATION = %s\n",__FUNCTION__,__LINE__, MTK_LCM_PHYSICAL_ROTATION);
 

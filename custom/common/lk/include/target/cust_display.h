@@ -256,21 +256,21 @@
 
 	// battery capacity rectangle
 	#define CAPACITY_LEFT                (109) // battery capacity center
-	#define CAPACITY_TOP                 (189)
+	#define CAPACITY_TOP                 (112)//(189)
 	#define CAPACITY_RIGHT               (211)
-	#define CAPACITY_BOTTOM              (350)
+	#define CAPACITY_BOTTOM              (226)//(350)
 
 	// first number rectangle
 	#define NUMBER_LEFT                  (126) // number
-	#define NUMBER_TOP                   (95)
+	#define NUMBER_TOP                   (38)//(95)
 	#define NUMBER_RIGHT                 (153)
-	#define NUMBER_BOTTOM                (131)
+	#define NUMBER_BOTTOM                (74)//(131)
 
 	// %  rectangle
 	#define PERCENT_LEFT                 (180) // percent number_left + 2*number_width
-	#define PERCENT_TOP                  (95)
+	#define PERCENT_TOP                  (38)//(95)
 	#define PERCENT_RIGHT                (212)
-	#define PERCENT_BOTTOM               (131)
+	#define PERCENT_BOTTOM               (74)//(131)
 
 	// top animation part
 	#define TOP_ANIMATION_LEFT           (109) // top animation

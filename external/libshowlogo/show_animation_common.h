@@ -70,9 +70,10 @@ typedef struct {
 /* version 2: show wireless charging animation                           */
 /*                                                                       */ 
 /***                                                                   ***/
-#define MAX_SUPPORT_ANIM_VER  2
+#define MAX_SUPPORT_ANIM_VER  3
 
 #define WIRELESS_CHARGING_ANIM_VER  2
+#define EXPAND_CHARGING_ANIM_VER		3
 
 // version_0 animation
 #define ANIM_V0_REGIONS  4 

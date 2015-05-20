@@ -47,7 +47,47 @@ RESOURCE_OBJ_LIST :=   \
             $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_bat_bg.raw \
             $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_bat_img.raw \
             $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_bat_100.raw \
-            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_kernel.raw
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_kernel.raw	\
+            \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_uboot2.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_battery2.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_low_battery2.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_charger_ov2.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_num2_0.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_num2_1.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_num2_2.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_num2_3.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_num2_4.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_num2_5.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_num2_6.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_num2_7.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_num2_8.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_num2_9.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_num_percent2.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_bat_animation2_01.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_bat_animation2_02.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_bat_animation2_03.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_bat_animation2_04.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_bat_animation2_05.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_bat_animation2_06.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_bat_animation2_07.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_bat_animation2_08.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_bat_animation2_09.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_bat_animation2_10.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_bat2_10_01.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_bat2_10_02.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_bat2_10_03.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_bat2_10_04.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_bat2_10_05.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_bat2_10_06.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_bat2_10_07.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_bat2_10_08.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_bat2_10_09.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_bat2_10_10.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_bat_bg2.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_bat_img2.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_bat2_100.raw \
+            $(BOOT_LOGO_DIR)/$(BOOT_LOGO)/$(BOOT_LOGO)_kernel2.raw
 
 GENERATED += \
             $(BOOT_LOGO_RESOURCE) \

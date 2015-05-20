@@ -168,8 +168,11 @@ void mt_disp_show_boot_logo(void)
     else
     {
         ///show_logo(0);
-        init_fb_screen();
-        fill_animation_logo(BOOT_LOGO_INDEX, mt_get_fb_addr(), mt_get_tempfb_addr(), logo_addr, phical_screen);
+        init_fb_screen();       	
+	 if(CFG_DISPLAY_WIDTH == 720)
+	 	fill_animation_logo(BOOT_LOGO_INDEX + KERNEL_LOGO_INDEX + 1, mt_get_fb_addr(), mt_get_tempfb_addr(), logo_addr, phical_screen);
+	 else
+	 	fill_animation_logo(BOOT_LOGO_INDEX, mt_get_fb_addr(), mt_get_tempfb_addr(), logo_addr, phical_screen);
         mt_disp_update(0, 0, CFG_DISPLAY_WIDTH, CFG_DISPLAY_HEIGHT);
     }
 
@@ -225,7 +228,10 @@ void mt_disp_show_battery_capacity(UINT32 capacity)
     {     
         init_fb_screen();
         
-        fill_animation_battery_by_ver(capacity, mt_get_fb_addr(), mt_get_tempfb_addr(), logo_addr, phical_screen, show_animationm_ver);            
+	 if(CFG_DISPLAY_WIDTH == 720)
+	 	fill_animation_battery_by_ver(capacity, mt_get_fb_addr(), mt_get_tempfb_addr(), logo_addr, phical_screen, 2); 
+	 else
+	 	fill_animation_battery_by_ver(capacity, mt_get_fb_addr(), mt_get_tempfb_addr(), logo_addr, phical_screen, show_animationm_ver); 
                   
         mt_disp_update(0, 0, CFG_DISPLAY_WIDTH, CFG_DISPLAY_HEIGHT);
     }
@@ -248,8 +254,11 @@ void mt_disp_show_charger_ov_logo(void)
     else
     {
         init_fb_screen();
-        fill_animation_logo(CHARGER_OV_INDEX, mt_get_fb_addr(), mt_get_tempfb_addr(), logo_addr, phical_screen);
-        mt_disp_update(0, 0, CFG_DISPLAY_WIDTH, CFG_DISPLAY_HEIGHT);
+	 if(CFG_DISPLAY_WIDTH == 720)
+        	fill_animation_logo(CHARGER_OV_INDEX + KERNEL_LOGO_INDEX + 1, mt_get_fb_addr(), mt_get_tempfb_addr(), logo_addr, phical_screen);
+	 else
+	 	fill_animation_logo(CHARGER_OV_INDEX, mt_get_fb_addr(), mt_get_tempfb_addr(), logo_addr, phical_screen);
+	 mt_disp_update(0, 0, CFG_DISPLAY_WIDTH, CFG_DISPLAY_HEIGHT);
     }
 
     return;
@@ -272,7 +281,10 @@ void mt_disp_show_low_battery(void)
     {
         init_fb_screen();
         //show_logo(2);
-        fill_animation_logo(LOW_BATTERY_INDEX, mt_get_fb_addr(), mt_get_tempfb_addr(), logo_addr, phical_screen);
+        if(CFG_DISPLAY_WIDTH == 720)
+	 	fill_animation_logo(LOW_BATTERY_INDEX + KERNEL_LOGO_INDEX + 1, mt_get_fb_addr(), mt_get_tempfb_addr(), logo_addr, phical_screen);
+	 else
+        	fill_animation_logo(LOW_BATTERY_INDEX, mt_get_fb_addr(), mt_get_tempfb_addr(), logo_addr, phical_screen);
         mt_disp_update(0, 0, CFG_DISPLAY_WIDTH, CFG_DISPLAY_HEIGHT);
     }
 

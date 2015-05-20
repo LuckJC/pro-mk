@@ -1592,7 +1592,8 @@ MTK_HDMI_SUPPORT=no
 #lingjinming 2014 08 27
 #BOOT_LOGO=qhd
 
-BOOT_LOGO=hvga
+BOOT_LOGO=szkj
+#BOOT_LOGO=hvga
 #BOOT_LOGO=cmcc_hd720
 
 # To choose kernel LCM driver name

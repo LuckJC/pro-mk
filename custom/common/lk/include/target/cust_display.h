@@ -256,21 +256,21 @@
 
 	// battery capacity rectangle
 	#define CAPACITY_LEFT                (109) // battery capacity center
-	#define CAPACITY_TOP                 (112)//(189)
+	#define CAPACITY_TOP                 (189)
 	#define CAPACITY_RIGHT               (211)
-	#define CAPACITY_BOTTOM              (226)//(350)
+	#define CAPACITY_BOTTOM              (350)
 
 	// first number rectangle
 	#define NUMBER_LEFT                  (126) // number
-	#define NUMBER_TOP                   (38)//(95)
+	#define NUMBER_TOP                   (95)
 	#define NUMBER_RIGHT                 (153)
-	#define NUMBER_BOTTOM                (74)//(131)
+	#define NUMBER_BOTTOM                (131)
 
 	// %  rectangle
 	#define PERCENT_LEFT                 (180) // percent number_left + 2*number_width
-	#define PERCENT_TOP                  (38)//(95)
+	#define PERCENT_TOP                  (95)
 	#define PERCENT_RIGHT                (212)
-	#define PERCENT_BOTTOM               (74)//(131)
+	#define PERCENT_BOTTOM               (131)
 
 	// top animation part
 	#define TOP_ANIMATION_LEFT           (109) // top animation
@@ -562,6 +562,72 @@
 	#define BAR_TOP             (292)
 	#define BAR_RIGHT           (590)
 	#define BAR_BOTTOM          (506) 
+
+#elif defined(SZKJ)
+
+	// hvga 320*320
+
+	// battery capacity rectangle
+	#define CAPACITY_LEFT                (109) // battery capacity center
+	#define CAPACITY_TOP                 (112)//(189)
+	#define CAPACITY_RIGHT               (211)
+	#define CAPACITY_BOTTOM              (250)//(350)
+
+	// first number rectangle
+	#define NUMBER_LEFT                  (126) // number
+	#define NUMBER_TOP                   (35)//(95)
+	#define NUMBER_RIGHT                 (153)
+	#define NUMBER_BOTTOM                (71)//(131)
+
+	// %  rectangle
+	#define PERCENT_LEFT                 (180) // percent number_left + 2*number_width
+	#define PERCENT_TOP                  (35)//(95)
+	#define PERCENT_RIGHT                (212)
+	#define PERCENT_BOTTOM               (71)//(131)
+
+	// top animation part
+	#define TOP_ANIMATION_LEFT           (109) // top animation
+	#define TOP_ANIMATION_TOP            (100)
+	#define TOP_ANIMATION_RIGHT          (211)
+	#define TOP_ANIMATION_BOTTOM         (118)
+
+	// for old animation
+	#define BAR_LEFT            (129)
+	#define BAR_TOP             (128)
+	#define BAR_RIGHT           (190)
+	#define BAR_BOTTOM          (245)
+
+	// hd720 720*1280
+
+	// battery capacity rectangle
+	#define CAPACITY_LEFT2                (278) // battery capacity center
+	#define CAPACITY_TOP2                 (556)
+	#define CAPACITY_RIGHT2              (441)
+	#define CAPACITY_BOTTOM2              (817)
+
+	// first number rectangle
+	#define NUMBER_LEFT2                  (290) // number
+	#define NUMBER_TOP2                   (386)
+	#define NUMBER_RIGHT2                 (335)
+	#define NUMBER_BOTTOM2                (450)
+
+	// %  rectangle
+	#define PERCENT_LEFT2                 (380) // percent number_left + 2*number_width
+	#define PERCENT_TOP2                  (386)
+	#define PERCENT_RIGHT2                (437)
+	#define PERCENT_BOTTOM2               (450)
+
+	// top animation part
+	#define TOP_ANIMATION_LEFT2           (278) // top animation
+	#define TOP_ANIMATION_TOP2            (100)
+	#define TOP_ANIMATION_RIGHT2          (441)
+	#define TOP_ANIMATION_BOTTOM2         (129)
+
+	// for old animation
+	#define BAR_LEFT2            (313)
+	#define BAR_TOP2             (238)
+	#define BAR_RIGHT2           (406)
+	#define BAR_BOTTOM2          (453)
 
 #else 
 

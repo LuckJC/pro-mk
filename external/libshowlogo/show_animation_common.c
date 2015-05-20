@@ -358,6 +358,55 @@ void fill_animation_battery_ver_1(unsigned int capacity, void *fill_addr, void *
     }
 }
 
+void fill_animation_battery_ver_3(unsigned int capacity, void *fill_addr, void * dec_logo_addr, void * logo_addr, LCM_SCREEN_T phical_screen)
+{
+    LOG_ANIM("[show_animation_common: %s %d]capacity : %d\n",__FUNCTION__,__LINE__, capacity);
+    
+    if (capacity >= 100) {
+        //show_logo(37); // battery 100
+        fill_animation_logo(FULL_BATTERY_INDEX + KERNEL_LOGO_INDEX + 1, fill_addr, dec_logo_addr, logo_addr,phical_screen);
+     
+    } else if (capacity < 10) {
+        LOG_ANIM("[show_animation_common: %s %d]charging_low_index = %d\n",__FUNCTION__,__LINE__, charging_low_index);  
+        charging_low_index ++ ;
+                
+        fill_animation_logo(LOW_BAT_ANIM_START_0 + KERNEL_LOGO_INDEX + 1 + charging_low_index, fill_addr, dec_logo_addr, logo_addr,phical_screen);
+        fill_animation_number(NUMBER_PIC_START_0 + KERNEL_LOGO_INDEX + 1 + capacity, 1, fill_addr, logo_addr, phical_screen);
+        fill_animation_dynamic(NUMBER_PIC_PERCENT + KERNEL_LOGO_INDEX + 1, percent_location_rect, fill_addr, percent_pic_addr, logo_addr, phical_screen);
+        
+        if (charging_low_index >= 9) charging_low_index = 0;
+
+    } else {
+
+        unsigned int capacity_grids = 0;
+        //static RECT_REGION_T battery_rect = {CAPACITY_LEFT,CAPACITY_TOP,CAPACITY_RIGHT,CAPACITY_BOTTOM};
+        capacity_grids = CAPACITY_BOTTOM - (CAPACITY_BOTTOM - CAPACITY_TOP) * (capacity - 10) / 90;
+        LOG_ANIM("[show_animation_common: %s %d]capacity_grids : %d,charging_animation_index = %d\n",__FUNCTION__,__LINE__, capacity_grids,charging_animation_index);   
+
+        //background 
+        fill_animation_logo(ANIM_V1_BACKGROUND_INDEX + KERNEL_LOGO_INDEX + 1, fill_addr, dec_logo_addr, logo_addr,phical_screen);
+        
+        fill_animation_line(ANIM_LINE_INDEX + KERNEL_LOGO_INDEX + 1, capacity_grids, fill_addr,  logo_addr, phical_screen);
+        fill_animation_number(NUMBER_PIC_START_0 + KERNEL_LOGO_INDEX + 1 + (capacity/10), 0, fill_addr, logo_addr, phical_screen);
+        fill_animation_number(NUMBER_PIC_START_0 + KERNEL_LOGO_INDEX + 1 + (capacity%10), 1, fill_addr, logo_addr, phical_screen);
+        fill_animation_dynamic(NUMBER_PIC_PERCENT + KERNEL_LOGO_INDEX + 1, percent_location_rect, fill_addr, percent_pic_addr, logo_addr, phical_screen);                
+        
+        
+         if (capacity <= 90)
+         {
+            RECT_REGION_T top_animation_rect = {TOP_ANIMATION_LEFT, capacity_grids - (TOP_ANIMATION_BOTTOM - TOP_ANIMATION_TOP), TOP_ANIMATION_RIGHT, capacity_grids};
+            //top_animation_rect.bottom = capacity_grids;
+            //top_animation_rect.top = capacity_grids - top_animation_height;
+            charging_animation_index++;        
+            //show_animation_dynamic(15 + charging_animation_index, top_animation_rect, top_animation_addr);
+            fill_animation_dynamic(BAT_ANIM_START_0 + KERNEL_LOGO_INDEX + 1 + charging_animation_index, top_animation_rect, fill_addr, top_animation_addr, logo_addr, phical_screen);  
+            
+            if (charging_animation_index >= 9) charging_animation_index = 0;
+         }
+    }
+
+}
+
 /*
  * Show charging animation by version
  *
@@ -378,6 +427,10 @@ void fill_animation_battery_by_ver(unsigned int capacity,void *fill_addr, void *
             break;
         case WIRELESS_CHARGING_ANIM_VER:
             fill_animation_battery_ver_2(capacity, fill_addr, dec_logo_addr, logo_addr, phical_screen);
+
+	     break;
+	 case EXPAND_CHARGING_ANIM_VER:
+            fill_animation_battery_ver_3(capacity, fill_addr, dec_logo_addr, logo_addr, phical_screen);
             
             break;            
         default:

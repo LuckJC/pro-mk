@@ -1284,7 +1284,7 @@ MTK_SNS_SUPPORT=yes
 MTK_SNS_TWITTER_APP=yes
 
 # When enable, executing factory reset will preserve the data in /data/app/
-MTK_SPECIAL_FACTORY_RESET=no
+MTK_SPECIAL_FACTORY_RESET=yes
 
 # yes means reporting specific SM cause to framework from RIL
 # no means not report ing specific SM cause to framework from RIL.

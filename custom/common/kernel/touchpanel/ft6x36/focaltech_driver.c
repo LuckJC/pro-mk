@@ -2245,7 +2245,8 @@ FOCAL_RESET_A3_REGISTER:
 	
    	#ifdef TPD_HAVE_BUTTON     
 		// initialize tpd button data
-    		tpd_button_setting(TPD_KEY_COUNT, tpd_keys_local, tpd_keys_dim_local);
+		if(touch_id == 0)
+    			tpd_button_setting(TPD_KEY_COUNT, tpd_keys_local, tpd_keys_dim_local);
 	#endif   
   
 	#if (defined(TPD_WARP_START) && defined(TPD_WARP_END))    
@@ -2475,6 +2476,7 @@ FOCAL_RESET_A3_REGISTER:
 	 if(ret == 1)
 	 {
 	 	touch_id = 1;
+		fts_i2c_tpd.tpd_have_button = 0;
 		fts_i2c_tpd.addr = (0x80 >> 1);
 	 }
         i2c_register_board_info(IIC_PORT, &fts_i2c_tpd, 1);

@@ -575,15 +575,15 @@
 
 	// first number rectangle
 	#define NUMBER_LEFT                  (126) // number
-	#define NUMBER_TOP                   (35)//(95)
+	#define NUMBER_TOP                   (20)//(95)
 	#define NUMBER_RIGHT                 (153)
-	#define NUMBER_BOTTOM                (71)//(131)
+	#define NUMBER_BOTTOM                (56)//(131)
 
 	// %  rectangle
 	#define PERCENT_LEFT                 (180) // percent number_left + 2*number_width
-	#define PERCENT_TOP                  (35)//(95)
+	#define PERCENT_TOP                  (20)//(95)
 	#define PERCENT_RIGHT                (212)
-	#define PERCENT_BOTTOM               (71)//(131)
+	#define PERCENT_BOTTOM               (56)//(131)
 
 	// top animation part
 	#define TOP_ANIMATION_LEFT           (109) // top animation

@@ -196,7 +196,7 @@ CUSTOM_SEC_AUTH_SUPPORT=no
 CUSTOM_SEC_SIGNTOOL_SUPPORT=no
 
 # Add these variables to define the default input method and default input method languages.
-DEFAULT_INPUT_METHOD=com.cootek.smartinputv5.TouchPalIME
+DEFAULT_INPUT_METHOD=com.iflytek.inputmethod.FlyIME
 
 # Add these variables to define the default input method and default input method languages.
 DEFAULT_LATIN_IME_LANGUAGES=hi en-US fr ru

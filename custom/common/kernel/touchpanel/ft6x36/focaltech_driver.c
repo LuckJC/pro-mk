@@ -2476,7 +2476,7 @@ FOCAL_RESET_A3_REGISTER:
 	 if(ret == 1)
 	 {
 	 	touch_id = 1;
-		fts_i2c_tpd.tpd_have_button = 0;
+		tpd_device_driver.tpd_have_button = 0;
 		fts_i2c_tpd.addr = (0x80 >> 1);
 	 }
         i2c_register_board_info(IIC_PORT, &fts_i2c_tpd, 1);

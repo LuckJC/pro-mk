@@ -33,5 +33,5 @@
           android:title="@string/more"
           style="@android:style/Widget.Holo.ActionButton.Overflow"
           android:icon="@drawable/btn_fm_overflow_selector"
-          android:enabled="false"/> 
+          android:enabled="false"/>
 </menu>

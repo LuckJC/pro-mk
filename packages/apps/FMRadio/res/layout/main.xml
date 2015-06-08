@@ -90,7 +90,7 @@
         android:id="@+id/bottombar_parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" >
+        android:layout_above="@+id/adjust_layout" >
 
         <LinearLayout
             android:id="@+id/bottom_bar"
@@ -238,5 +238,46 @@
             android:src="@drawable/fm_anim"
             android:visibility="invisible" />
     </LinearLayout>
+    
+    <FrameLayout android:id="@+id/adjust_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+        <ImageButton android:id="@+id/sound"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:src="@drawable/sound"
+	        android:layout_gravity="center_vertical"/>
+	    <LinearLayout android:id="@+id/adjust_volume"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="center_vertical"
+		    android:gravity="center_vertical"
+		    android:orientation="horizontal"
+		    android:background="@drawable/volume_bg"
+		    android:visibility="invisible">
+		    
+		    <ImageButton android:id="@+id/volume_dec"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:src="@drawable/volume_decrease"
+		        android:background="@android:color/transparent"/>
+		 
+		 	<SeekBar android:id="@+id/volume_bar"
+			    android:layout_width="0dp"
+			    android:layout_height="wrap_content"
+			    android:layout_weight="1"
+			    android:progress="20"
+			    android:max="100"
+			    style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"/>
+		 
+		    <ImageButton android:id="@+id/volume_inc"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:src="@drawable/volume_increase" 
+		        android:background="@android:color/transparent"/>
+		    
+		</LinearLayout>
+    </FrameLayout>
 
 </RelativeLayout>

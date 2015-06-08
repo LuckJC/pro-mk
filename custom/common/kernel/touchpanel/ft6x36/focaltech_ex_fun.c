@@ -33,7 +33,7 @@ int apk_debug_flag = 0;
 struct i2c_client *G_Client;
 /* modify by huangchao */
 static unsigned char CTPM_FW[] = {
-	#include "Shizhong_Watch_ID59_V05_20150512_app.i"
+	#include "Shizhong_Watch_ID59_V07_20150605_app.i"
 };
 //kernel 3.10
 //struct i2c_client *G_Client;

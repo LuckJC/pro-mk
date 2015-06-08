@@ -21,7 +21,7 @@
 
     <application
         android:hardwareAccelerated="false"
-        android:icon="@drawable/icon_fmradio"
+        android:icon="@drawable/ic_launcher_temp"
         android:label="@string/app_name"
         android:supportsRtl="true">
         <activity

@@ -371,25 +371,13 @@ public class FMRadioEMActivity extends Activity {
             mHandler.sendMessage(msg);
         }
     };
-    
-	
-	private boolean mIsSmallLCM=false;//add by lixd
+
     /**
      *  Called when the activity is first created. 
      */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LogUtils.d(TAG, "begin FMRadioEMActivity.onCreate");
-		
-				////add by lixd for fullscreen ,no statusbar
-					DisplayMetrics realMetrics = new DisplayMetrics();
-					getWindowManager().getDefaultDisplay().getRealMetrics(realMetrics);
-				if ((realMetrics.widthPixels == 320) && (realMetrics.heightPixels == 320)) {
-					mIsSmallLCM = true;
-					getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-					WindowManager.LayoutParams.FLAG_FULLSCREEN);
-					//getActionBar().setDisplayHomeAsUpEnabled(true);
-					}
 		
         // Bind the activity to FM audio stream.
         setVolumeControlStream(AudioManager.STREAM_FM);

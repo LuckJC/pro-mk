@@ -68,9 +68,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.SeekBar;
 import android.widget.PopupMenu.OnDismissListener;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -94,7 +97,8 @@ public class FMRadioActivity extends Activity implements
         OnMenuItemClickListener, OnDismissListener,
         NoAntennaDialog.NoAntennaListener,
         SearchChannelsDialog.CancelSearchListener,
-        FMRecordDialogFragment.OnRecordingDialogClickListener {
+        FMRecordDialogFragment.OnRecordingDialogClickListener,
+        OnSeekBarChangeListener {
     
     public static final String TAG = "FmRx/Activity"; // log tag
 
@@ -192,6 +196,19 @@ public class FMRadioActivity extends Activity implements
     // when increase/decrease 0.1
     private AudioManager mAudioManager = null;
     private IProjectStringExt mProjectStringExt = null;
+    
+    // if is in small LCM
+    private boolean mIsSmallLcm;
+    private MenuItem mMenuItemSearch = null;
+    
+	private static final int STREAM_TYPE = AudioManager.STREAM_FM;
+
+	private AudioManager mAM;
+	private View mSoundView;
+	private View mAdjustView;
+	private SeekBar mVolumeBar;
+	private int mMaxVolume;
+	private boolean mAdjust;
 
     private FMRadioListener mFMRadioListener = new FMRadioListener() {
 
@@ -262,6 +279,7 @@ public class FMRadioActivity extends Activity implements
          *            clicked view
          */
         public void onClick(View v) {
+        	mAdjust = false;
             switch (v.getId()) {
             case R.id.btn_record:
                 // if power up, record FM, else toast prompt user to power up
@@ -333,13 +351,62 @@ public class FMRadioActivity extends Activity implements
                 seekStation(mCurrentStation, true); // false: previous station
                                                     // true: next station
                 break;
+                
+    		case R.id.volume_inc:
+    			adjustVolume(AudioManager.ADJUST_RAISE);
+    			mAdjust = true;
+    			break;
+
+    		case R.id.volume_dec:
+    			adjustVolume(AudioManager.ADJUST_LOWER);
+    			mAdjust = true;
+    			break;
+    			
+    		case R.id.sound:
+    			showVolumeAdjustView();
+    			mAdjust = true;
+    			break;
+    			
+    		case R.id.main_view:
+    			break;
 
             default:
                 LogUtils.d(TAG, "invalid view id");
                 break;
             }
+            
+            if (!mAdjust) {
+    			if (mAdjustView.getVisibility() == View.VISIBLE) {
+    				mAdjustView.setVisibility(View.INVISIBLE);
+    			}
+    		}
         }
     };
+    
+	private void showVolumeAdjustView() {
+		mAdjustView.setVisibility(View.VISIBLE);
+	}
+	
+	private void adjustVolume(int direction) {
+		mAM.adjustStreamVolume(STREAM_TYPE, direction, 0);
+		int volume = mAM.getStreamVolume(STREAM_TYPE);
+		mVolumeBar.setProgress(volume);
+	}
+	
+	@Override
+	public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+	}
+
+	@Override
+	public void onStartTrackingTouch(SeekBar seekBar) {
+	}
+
+	@Override
+	public void onStopTrackingTouch(SeekBar seekBar) {
+		int progress = mVolumeBar.getProgress();
+		mAM.setStreamVolume(STREAM_TYPE, progress, 0);
+	}
+	
     
     /**
      * Update FM recording state with given state from FM service
@@ -837,27 +904,22 @@ public class FMRadioActivity extends Activity implements
      * 
      * @param savedInstanceState
      *            saved bundle in onSaveInstanceState
-     */
-	 
-	 private boolean mIsSmallLCM=false;//add by lixd
-	 
+     */	
     public void onCreate(Bundle savedInstanceState) {
         long startTime = System.currentTimeMillis();
         Log.i(TAG, "[Performance test][FMRadio] onCreate start [" + startTime + "]");
         super.onCreate(savedInstanceState);
         LogUtils.i(TAG, "FMRadioActivity.onCreate start");
-
-					////add by lixd for fullscreen ,no statusbar
-					DisplayMetrics realMetrics = new DisplayMetrics();
-					getWindowManager().getDefaultDisplay().getRealMetrics(realMetrics);
-				if ((realMetrics.widthPixels == 320) && (realMetrics.heightPixels == 320)) {
-					mIsSmallLCM = true;
-					getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-					WindowManager.LayoutParams.FLAG_FULLSCREEN);
-					//getActionBar().setDisplayHomeAsUpEnabled(true);
-				}
-		
-		
+        
+        //if in small lcm mode
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
+        if (outMetrics.widthPixels == 320 && outMetrics.heightPixels == 320) {
+        	mIsSmallLcm = true;
+        } else {
+        	mIsSmallLcm = false;
+        }
+        
         mFragmentManager = getFragmentManager();
         // Bind the activity to FM audio stream.
         setVolumeControlStream(AudioManager.STREAM_FM);
@@ -1132,7 +1194,11 @@ public class FMRadioActivity extends Activity implements
         mMenuItemChannelList = menu.findItem(R.id.fm_channel_list);
         mMenuItemOverflow = menu.findItem(R.id.fm_menu);
         mMenuItemPower = menu.findItem(R.id.fm_power);
-
+        if (mIsSmallLcm) {
+        	mMenuItemOverflow.setTitle(R.string.optmenu_search);
+        	mMenuItemOverflow.setIcon(R.drawable.btn_fm_search);
+        }
+        
         LogUtils.d(TAG, "end FMRadioActivity.onCreateOptionsMenu");
         return true;
     }
@@ -1223,36 +1289,43 @@ public class FMRadioActivity extends Activity implements
             break;
 
         case R.id.fm_menu:
-            item.setEnabled(false);
-            
-            mPopupMenu = new PopupMenu(mContext, findViewById(R.id.fm_menu));
-            Menu menu = mPopupMenu.getMenu();
-            mPopupMenu.getMenuInflater().inflate(R.menu.fm_menu, menu);
-            mPopupMenu.setOnMenuItemClickListener(this);
-            mPopupMenu.setOnDismissListener(this);
-            // If record or RDS do not support,remove them from popup menu.
-            boolean isFmViaBt = false;
+        	if (mIsSmallLcm) {
+        		onSearchItemClick();
+        	} else {
+                item.setEnabled(false);
+                
+                mPopupMenu = new PopupMenu(mContext, findViewById(R.id.fm_menu));
+                Menu menu = mPopupMenu.getMenu();
+                mPopupMenu.getMenuInflater().inflate(R.menu.fm_menu, menu);
+                mPopupMenu.setOnMenuItemClickListener(this);
+                mPopupMenu.setOnDismissListener(this);
+                // If record or RDS do not support,remove them from popup menu.
+                boolean isFmViaBt = false;
 
-            isFmViaBt = mService.isFmViaBt();
-            if (!FeatureOption.MTK_FM_RECORDING_SUPPORT) {
-                menu.findItem(R.id.fm_record).setVisible(false);
-            }
-            // When FM not playing or play over BT, prohibit recording
+                isFmViaBt = mService.isFmViaBt();
+                if (!FeatureOption.MTK_FM_RECORDING_SUPPORT) {
+                    menu.findItem(R.id.fm_record).setVisible(false);
+                }
+                // When FM not playing or play over BT, prohibit recording
 
-            boolean isPlaying = mService.isPowerUp();
-            if (isPlaying && !isFmViaBt) {
-                menu.findItem(R.id.fm_record).setEnabled(true);
-                menu.findItem(R.id.fm_sound_mode).setEnabled(true);
-                menu.findItem(R.id.fm_sound_mode).setTitle(
-                        mService.isSpeakerUsed() ? R.string.optmenu_earphone 
-                                : R.string.optmenu_speaker);
-            }
-            if (isPlaying) {
-                menu.findItem(R.id.fm_search).setEnabled(true);
-            }
-            
-            mPopupMenu.show();
+                boolean isPlaying = mService.isPowerUp();
+                if (isPlaying && !isFmViaBt) {
+                    menu.findItem(R.id.fm_record).setEnabled(true);
+                    menu.findItem(R.id.fm_sound_mode).setEnabled(true);
+                    menu.findItem(R.id.fm_sound_mode).setTitle(
+                            mService.isSpeakerUsed() ? R.string.optmenu_earphone 
+                                    : R.string.optmenu_speaker);
+                }
+                if (isPlaying) {
+                    menu.findItem(R.id.fm_search).setEnabled(true);
+                }
+                
+                mPopupMenu.show();
+        	}
             break;
+            
+        case R.id.fm_search:
+        	break;
 
         default:
             LogUtils.e(TAG, "Error: Invalid options menu item.");
@@ -1761,14 +1834,7 @@ public class FMRadioActivity extends Activity implements
         switch (item.getItemId()) {
 
         case R.id.fm_search:
-            mIsNeedShowSearchDlg = true;
-            refreshImageButton(false);
-            refreshActionMenuItem(false);
-            refreshPopupMenuItem(false);
-            refreshActionMenuPower(false);
-            showSearchDialog();
-            FMRadioStation.cleanSearchedStations(mContext);
-            mService.startScanAsync();
+        	onSearchItemClick();
             break;
            
         case R.id.fm_sound_mode:
@@ -1788,6 +1854,17 @@ public class FMRadioActivity extends Activity implements
             break;
         }
         return false;
+    }
+    
+    private void onSearchItemClick() {
+    	mIsNeedShowSearchDlg = true;
+    	refreshImageButton(false);
+    	refreshActionMenuItem(false);
+    	refreshPopupMenuItem(false);
+    	refreshActionMenuPower(false);
+    	showSearchDialog();
+    	FMRadioStation.cleanSearchedStations(mContext);
+    	mService.startScanAsync();
     }
 
     /**
@@ -2075,6 +2152,20 @@ public class FMRadioActivity extends Activity implements
         Menu menu = mPopupMenu.getMenu();
         mPopupMenu.getMenuInflater().inflate(R.menu.fm_menu, menu);
 
+        //for small lcm
+        if (mIsSmallLcm) {
+        	findViewById(R.id.adjust_layout).setVisibility(View.VISIBLE);
+        	mAM = (AudioManager) getSystemService(AUDIO_SERVICE);
+        	mSoundView = findViewById(R.id.sound);
+        	
+        	mAdjustView = findViewById(R.id.adjust_volume);
+        	mVolumeBar = (SeekBar)findViewById(R.id.volume_bar);
+        	mMaxVolume = mAM.getStreamMaxVolume(STREAM_TYPE);
+        	mVolumeBar.setMax(mMaxVolume);
+        	
+        } else {
+        	findViewById(R.id.adjust_layout).setVisibility(View.GONE);
+        }
     }
 
     private void registerButtonClickListener() {
@@ -2086,6 +2177,14 @@ public class FMRadioActivity extends Activity implements
         mButtonIncrease.setOnClickListener(mButtonClickListener);
         mButtonPrevStation.setOnClickListener(mButtonClickListener);
         mButtonNextStation.setOnClickListener(mButtonClickListener);
+        
+        if (mIsSmallLcm) {        	
+        	mSoundView.setOnClickListener(mButtonClickListener);
+        	findViewById(R.id.volume_inc).setOnClickListener(mButtonClickListener);
+        	findViewById(R.id.volume_dec).setOnClickListener(mButtonClickListener);
+        	findViewById(R.id.main_view).setOnClickListener(mButtonClickListener);
+        	mVolumeBar.setOnSeekBarChangeListener(this);
+        }
     }
 
     private void registerSdcardReceiver() {

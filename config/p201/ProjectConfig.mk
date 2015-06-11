@@ -783,7 +783,7 @@ MTK_GEMINI_3SIM_SUPPORT=no
 MTK_GEMINI_4SIM_SUPPORT=no
 
 # Add MTK_GEMINI_SMART_3G_SWITCH feature.
-MTK_GEMINI_SMART_3G_SWITCH=2
+MTK_GEMINI_SMART_3G_SWITCH=0
 
 # To identify which GPS chip be used on current platform.
 MTK_GPS_CHIP=MTK_GPS_MT6582
@@ -1541,7 +1541,7 @@ MTK_FD_FORCE_REL_SUPPORT=yes
 MTK_FD_SUPPORT=yes
 
 # Enable or disable the 3G Switch feature
-MTK_GEMINI_3G_SWITCH=yes
+MTK_GEMINI_3G_SWITCH=no
 
 # For Platform: MT6573, MT6575 If it is equal to "modem_2g", means only support 2g modem. If it is equal to "modem_3g", means  support 2g and 3g modem
 MTK_MODEM_SUPPORT=
@@ -1564,13 +1564,13 @@ MTK_FM_SUPPORT=yes
 MTK_FM_TX_SUPPORT=no
 
 # Support GEMINI or not
-GEMINI=yes
+GEMINI=no
 
 # Enable or disable the GEMINI enhancement
-MTK_GEMINI_ENHANCEMENT=yes
+MTK_GEMINI_ENHANCEMENT=no
 
 # Extend our Gemini feature to support daul RIL with single modem logistic.
-MTK_SHARE_MODEM_CURRENT=2
+MTK_SHARE_MODEM_CURRENT=1
 
 # Capability of the underlay modem
 #  single or gemini

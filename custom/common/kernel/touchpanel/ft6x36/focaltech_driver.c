@@ -101,43 +101,43 @@
 	#define FTS_GESTURE_OUTPUT_UNIT_LENGTH 	4
 
 
- /* 0x2x*/
-#define SPEC_GESTURE_LINE_HORIZ_LEFT    0x20
-#define SPEC_GESTURE_LINE_HORIZ_RIGHT   0x21
-#define SPEC_GESTURE_LINE_VERT_UP       0x22
-#define SPEC_GESTURE_LINE_VERT_DOWN     0x23
-#define SPEC_GESTURE_DOUBLE_CLICK       0x24
+/* 0x2x*/
+#define SPEC_GESTURE_LINE_HORIZ_LEFT    	0x20
+#define SPEC_GESTURE_LINE_HORIZ_RIGHT   	0x21
+#define SPEC_GESTURE_LINE_VERT_UP       		0x22
+#define SPEC_GESTURE_LINE_VERT_DOWN     	0x23
+#define SPEC_GESTURE_DOUBLE_CLICK       		0x24
 
-	/* Character */
-	/* 0x3x*/
+/* Character */
+/* 0x3x*/
 #define SPEC_GESTURE_CHAR_O             0x30
-#define SPEC_GESTURE_CHAR_W             0x31
-#define SPEC_GESTURE_CHAR_M             0x32
+#define SPEC_GESTURE_CHAR_W            0x31
+#define SPEC_GESTURE_CHAR_M            0x32
 #define SPEC_GESTURE_CHAR_E             0x33
-	//#define SPEC_GESTURE_CHAR_C             0x10
-	//#define SPEC_GESTURE_CHAR_G             0x20
+#define SPEC_GESTURE_CHAR_C             0x34
+#define SPEC_GESTURE_CHAR_G             0x35
 #define SPEC_GESTURE_CHAR_A             0x36
 #define SPEC_GESTURE_CHAR_D             0x37
 
-	/* 0x4x*/
+/* 0x4x*/
 #define SPEC_GESTURE_CHAR_N             0x40
-	//#define SPEC_GESTURE_CHAR_Z             0x02
+#define SPEC_GESTURE_CHAR_Z             0x41
 #define SPEC_GESTURE_CHAR_B             0x42
-	//#define SPEC_GESTURE_CHAR_Q             0x08
+#define SPEC_GESTURE_CHAR_Q             0x43
 #define SPEC_GESTURE_CHAR_L             0x44
 #define SPEC_GESTURE_CHAR_P             0x45
 #define SPEC_GESTURE_CHAR_S             0x46
 #define SPEC_GESTURE_CHAR_U             0x47
 
-	/* 0x5x*/
-#define SPEC_GESTURE_SIGN_AT            0x50
-#define SPEC_GESTURE_SIGN_ARROW_LEFT    0x51
-#define SPEC_GESTURE_SIGN_ARROW_RIGHT   0x52
-#define SPEC_GESTURE_SIGN_ARROW_UP      0x53
+/* 0x5x*/
+#define SPEC_GESTURE_SIGN_AT            		0x50
+#define SPEC_GESTURE_SIGN_ARROW_LEFT    	0x51
+#define SPEC_GESTURE_SIGN_ARROW_RIGHT   	0x52
+#define SPEC_GESTURE_SIGN_ARROW_UP      	0x53
 #define SPEC_GESTURE_SIGN_ARROW_DOWN    0x54
-	//#define SPEC_GESTURE_SIGN_TRI_ANGLE     0x20
+#define SPEC_GESTURE_SIGN_TRI_ANGLE     	0x55
 
-	/* 0x6x*/
+/* 0x6x*/
 #define SPEC_GESTURE_NUMBER_3            0x60
 #define SPEC_GESTURE_NUMBER_6            0x61
 #define SPEC_GESTURE_NUMBER_9            0x62
@@ -146,95 +146,48 @@
 #define SPEC_GESTURE_NUMBER_2            0x65
 
 
-#define KEY_GESTURE_LINE_HORIZ_LEFT    KEY_LEFT
-#define KEY_GESTURE_LINE_HORIZ_RIGHT   KEY_RIGHT
-#define KEY_GESTURE_LINE_VERT_UP       KEY_UP
-#define KEY_GESTURE_LINE_VERT_DOWN     KEY_DOWN
-#define KEY_GESTURE_DOUBLE_CLICK       KEY_X
+#define KEY_GESTURE_LINE_HORIZ_LEFT    		KEY_LEFT
+#define KEY_GESTURE_LINE_HORIZ_RIGHT   	KEY_RIGHT
+#define KEY_GESTURE_LINE_VERT_UP       		KEY_UP
+#define KEY_GESTURE_LINE_VERT_DOWN     	KEY_DOWN
+#define KEY_GESTURE_DOUBLE_CLICK       		KEY_X
 
-	/* Character */
-	/* 0x3x*/
+/* Character */
+/* 0x3x*/
 #define KEY_GESTURE_CHAR_O             KEY_O
 #define KEY_GESTURE_CHAR_W             KEY_W
 #define KEY_GESTURE_CHAR_M             KEY_M
 #define KEY_GESTURE_CHAR_E             KEY_E
-	//#define KEY_GESTURE_CHAR_C             KEY_C
-	//#define KEY_GESTURE_CHAR_G             KEY_G
+#define KEY_GESTURE_CHAR_C             KEY_C
+#define KEY_GESTURE_CHAR_G             KEY_G
 #define KEY_GESTURE_CHAR_A             KEY_A
 #define KEY_GESTURE_CHAR_D             KEY_D
 
-	/* 0x4x*/
+/* 0x4x*/
 #define KEY_GESTURE_CHAR_N             KEY_N
-	//#define KEY_GESTURE_CHAR_Z             KEY_Z
+#define KEY_GESTURE_CHAR_Z             KEY_Z
 #define KEY_GESTURE_CHAR_B             KEY_B
-	//#define KEY_GESTURE_CHAR_Q             KEY_Q
+#define KEY_GESTURE_CHAR_Q             KEY_Q
 #define KEY_GESTURE_CHAR_L             KEY_L
 #define KEY_GESTURE_CHAR_P             KEY_P
 #define KEY_GESTURE_CHAR_S             KEY_S
 #define KEY_GESTURE_CHAR_U             KEY_U
 
-	/* 0x5x*/
+/* 0x5x*/
 #define KEY_GESTURE_SIGN_AT            			KEY_ENTER
 #define KEY_GESTURE_SIGN_ARROW_LEFT    	KEY_LEFTCTRL
 #define KEY_GESTURE_SIGN_ARROW_RIGHT   	KEY_RIGHTCTRL
 #define KEY_GESTURE_SIGN_ARROW_UP      	KEY_PAGEUP
 #define KEY_GESTURE_SIGN_ARROW_DOWN    	KEY_PAGEDOWN
-	//#define KEY_GESTURE_SIGN_TRI_ANGLE     0x20
+#define KEY_GESTURE_SIGN_TRI_ANGLE     		KEY_MACRO
 
-	/* 0x6x*/
+/* 0x6x*/
 #define KEY_GESTURE_NUMBER_3            KEY_3
 #define KEY_GESTURE_NUMBER_6            KEY_6
 #define KEY_GESTURE_NUMBER_9            KEY_9
 #define KEY_GESTURE_NUMBER_7            KEY_7
 #define KEY_GESTURE_NUMBER_8            KEY_8
 #define KEY_GESTURE_NUMBER_2            KEY_2
-
-
-
-	/* ID */	
-	#define GESTURE_E		    					0x33
-	#define GESTURE_M		    					0x32
-	#define GESTURE_L		    					0x44
-	#define GESTURE_O		    					0x30
-	#define GESTURE_S		    					0x46
-	#define GESTURE_U 							0x47
-	#define GESTURE_W		    					0x31
-	#define GESTURE_Z		    					0x47
-
-	#define GESTURE_UP                                           	0x22		/* ¡ü */
-	#define GESTURE_DOWN                                     	0x23		/* ¡ý */
-	#define GESTURE_LEFT                                        	0x20		/* ¡û */
-	#define GESTURE_RIGHT                                     	0x21		/* ¡ú */
-	#define GESTURE_DOUBLECLICK				0x24
-
-	#define GESTURE_F1                                            0xE8		/* ^ */
-	#define GESTURE_F2                                            0x52		/* V */
-	#define GESTURE_F3                                            0x53		/* < */
-	#define GESTURE_F4                                            0x54		/* > */
-	#define GESTURE_F5                                            0x55		/* ¡÷ */
-
-	/* Key map */	
-	#define KEY_GESTURE_E 						KEY_E
-	#define KEY_GESTURE_M 						KEY_M 
-	#define KEY_GESTURE_L 						KEY_L
-	#define KEY_GESTURE_O 						KEY_O
-	#define KEY_GESTURE_S 						KEY_S 
-	#define KEY_GESTURE_U 						KEY_U
-	#define KEY_GESTURE_W 						KEY_W
-	#define KEY_GESTURE_Z 						KEY_Z
-
-	#define KEY_GESTURE_UP 						KEY_UP			/* ¡ü 103 */
-	#define KEY_GESTURE_DOWN					KEY_DOWN		/* ¡ý 108 */
-	#define KEY_GESTURE_LEFT					KEY_LEFT			/* ¡û 105 */
-	#define KEY_GESTURE_RIGHT					KEY_RIGHT		/* ¡ú 106 */
-	#define KEY_GESTURE_DOUBLECLICK			KEY_X			/* ¡Ñ 45 */
-	
-	#define KEY_GESTURE_F1						KEY_PAGEUP		/* ¡Ä 104 */
-	#define KEY_GESTURE_F2						KEY_PAGEDOWN	/* ¡Å 109 */
-	#define KEY_GESTURE_F3						KEY_LEFTCTRL	/* <    29 */
-	#define KEY_GESTURE_F4						KEY_RIGHTCTRL	/* >    97 */	
-	#define KEY_GESTURE_F5						KEY_T			/* ¡÷ 20 */
-
 	
 
 	unsigned short coordinate_x[150] = {0};
@@ -259,26 +212,26 @@ struct fts_keys shizhong_fts_keys[] =
 	{SPEC_GESTURE_CHAR_W,                 KEY_GESTURE_CHAR_W},          
 	{SPEC_GESTURE_CHAR_M,                 KEY_GESTURE_CHAR_M},          
 	{SPEC_GESTURE_CHAR_E,                 KEY_GESTURE_CHAR_E},          
-	//{SPEC_GESTURE_CHAR_C,                 KEY_GESTURE_CHAR_C},          
-	//{SPEC_GESTURE_CHAR_G,                 KEY_GESTURE_CHAR_G},          
+	{SPEC_GESTURE_CHAR_C,                 KEY_GESTURE_CHAR_C},          
+	{SPEC_GESTURE_CHAR_G,                 KEY_GESTURE_CHAR_G},          
 	{SPEC_GESTURE_CHAR_A,                 KEY_GESTURE_CHAR_A},          
 	{SPEC_GESTURE_CHAR_D,                 KEY_GESTURE_CHAR_D},          
 	                                                                
 	{SPEC_GESTURE_CHAR_N,                 KEY_GESTURE_CHAR_N},          
-	//{SPEC_GESTURE_CHAR_Z,                 KEY_GESTURE_CHAR_Z},          
+	{SPEC_GESTURE_CHAR_Z,                 KEY_GESTURE_CHAR_Z},          
 	{SPEC_GESTURE_CHAR_B,                 KEY_GESTURE_CHAR_B},          
-	//{SPEC_GESTURE_CHAR_Q,                 KEY_GESTURE_CHAR_Q},          
+	{SPEC_GESTURE_CHAR_Q,                 KEY_GESTURE_CHAR_Q},          
 	{SPEC_GESTURE_CHAR_L,                 KEY_GESTURE_CHAR_L},          
 	{SPEC_GESTURE_CHAR_P,                 KEY_GESTURE_CHAR_P},          
 	{SPEC_GESTURE_CHAR_S,                 KEY_GESTURE_CHAR_S},          
 	{SPEC_GESTURE_CHAR_U,                 KEY_GESTURE_CHAR_U},          
 	                                                                
-	{SPEC_GESTURE_SIGN_AT,                KEY_GESTURE_SIGN_AT},         
+	{SPEC_GESTURE_SIGN_AT,                		KEY_GESTURE_SIGN_AT},         
 	{SPEC_GESTURE_SIGN_ARROW_LEFT,        KEY_GESTURE_SIGN_ARROW_LEFT}, 
-	{SPEC_GESTURE_SIGN_ARROW_RIGHT,       KEY_GESTURE_SIGN_ARROW_RIGHT},
-	{SPEC_GESTURE_SIGN_ARROW_UP,          KEY_GESTURE_SIGN_ARROW_UP},   
-	{SPEC_GESTURE_SIGN_ARROW_DOWN,        KEY_GESTURE_SIGN_ARROW_DOWN}, 
-	//{SPEC_GESTURE_SIGN_TRI_ANGLE,         KEY_GESTURE_SIGN_TRI_ANGLE},  
+	{SPEC_GESTURE_SIGN_ARROW_RIGHT,      KEY_GESTURE_SIGN_ARROW_RIGHT},
+	{SPEC_GESTURE_SIGN_ARROW_UP,          	KEY_GESTURE_SIGN_ARROW_UP},   
+	{SPEC_GESTURE_SIGN_ARROW_DOWN,     	KEY_GESTURE_SIGN_ARROW_DOWN}, 
+	{SPEC_GESTURE_SIGN_TRI_ANGLE,         	KEY_GESTURE_SIGN_TRI_ANGLE},  
 	                                                                
 	{SPEC_GESTURE_NUMBER_3,               KEY_GESTURE_NUMBER_3},        
 	{SPEC_GESTURE_NUMBER_6,               KEY_GESTURE_NUMBER_6},        
@@ -1835,71 +1788,10 @@ static void second_handler(unsigned long arg)
 			init_para(720,1280,60,0,0);
 
 	 	/* modify by huanchao */
-		/*input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_E); 
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_M); 
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_L);
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_O);
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_S);
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_U);
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_W);
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_Z);
-
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_UP); 
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_DOWN);
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_LEFT); 
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_RIGHT);
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_DOUBLECLICK);
-		
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_F1);
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_F2);
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_F3);
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_F4);
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_F5);*/
-
 		for(i = 0; i < sizeof(shizhong_fts_keys) / sizeof(shizhong_fts_keys[0]); i++)
 		{
 			input_set_capability(tpd->dev, EV_KEY, shizhong_fts_keys[i].key); 
 		}
-/*
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_LINE_HORIZ_LEFT); 
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_LINE_HORIZ_RIGHT); 
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_LINE_VERT_UP); 
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_LINE_VERT_DOWN); 
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_DOUBLE_CLICK); 
-		
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_CHAR_O); 
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_CHAR_W); 
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_CHAR_M); 
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_CHAR_E); 
-		//input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_CHAR_C); 
-		//input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_CHAR_G); 
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_CHAR_A); 
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_CHAR_D); 
-
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_CHAR_N); 
-		//input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_CHAR_Z); 
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_CHAR_B); 
-		//input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_CHAR_Q); 
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_CHAR_L); 
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_CHAR_P); 
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_CHAR_S); 
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_CHAR_U); 
-
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_SIGN_AT); 
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_SIGN_ARROW_LEFT); 
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_SIGN_ARROW_RIGHT); 
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_SIGN_ARROW_UP); 
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_SIGN_ARROW_DOWN); 
-		//input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_SIGN_TRI_ANGLE); 
-
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_NUMBER_3); 
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_NUMBER_6); 
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_NUMBER_9); 
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_NUMBER_7); 
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_NUMBER_8); 
-		input_set_capability(tpd->dev, EV_KEY, KEY_GESTURE_NUMBER_2); */
-		/* end modify by huangchao */
-
 	#endif
 
 	#ifdef MT_PROTOCOL_B

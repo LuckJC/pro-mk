@@ -101,93 +101,93 @@
 	#define FTS_GESTURE_OUTPUT_UNIT_LENGTH 	4
 
 
-/* 0x2x*/
-#define SPEC_GESTURE_LINE_HORIZ_LEFT    	0x20
-#define SPEC_GESTURE_LINE_HORIZ_RIGHT   	0x21
-#define SPEC_GESTURE_LINE_VERT_UP       		0x22
-#define SPEC_GESTURE_LINE_VERT_DOWN     	0x23
-#define SPEC_GESTURE_DOUBLE_CLICK       		0x24
+	/* 0x2x*/
+	#define SPEC_GESTURE_LINE_HORIZ_LEFT    	0x20
+	#define SPEC_GESTURE_LINE_HORIZ_RIGHT   	0x21
+	#define SPEC_GESTURE_LINE_VERT_UP       		0x22
+	#define SPEC_GESTURE_LINE_VERT_DOWN     	0x23
+	#define SPEC_GESTURE_DOUBLE_CLICK       		0x24
 
-/* Character */
-/* 0x3x*/
-#define SPEC_GESTURE_CHAR_O             0x30
-#define SPEC_GESTURE_CHAR_W            0x31
-#define SPEC_GESTURE_CHAR_M            0x32
-#define SPEC_GESTURE_CHAR_E             0x33
-#define SPEC_GESTURE_CHAR_C             0x34
-#define SPEC_GESTURE_CHAR_G             0x35
-#define SPEC_GESTURE_CHAR_A             0x36
-#define SPEC_GESTURE_CHAR_D             0x37
+	/* Character */
+	/* 0x3x*/
+	#define SPEC_GESTURE_CHAR_O             0x30
+	#define SPEC_GESTURE_CHAR_W            0x31
+	#define SPEC_GESTURE_CHAR_M            0x32
+	#define SPEC_GESTURE_CHAR_E             0x33
+	#define SPEC_GESTURE_CHAR_C             0x34
+	#define SPEC_GESTURE_CHAR_G             0x35
+	#define SPEC_GESTURE_CHAR_A             0x36
+	#define SPEC_GESTURE_CHAR_D             0x37
 
-/* 0x4x*/
-#define SPEC_GESTURE_CHAR_N             0x40
-#define SPEC_GESTURE_CHAR_Z             0x41
-#define SPEC_GESTURE_CHAR_B             0x42
-#define SPEC_GESTURE_CHAR_Q             0x43
-#define SPEC_GESTURE_CHAR_L             0x44
-#define SPEC_GESTURE_CHAR_P             0x45
-#define SPEC_GESTURE_CHAR_S             0x46
-#define SPEC_GESTURE_CHAR_U             0x47
+	/* 0x4x*/
+	#define SPEC_GESTURE_CHAR_N             0x40
+	#define SPEC_GESTURE_CHAR_Z             0x41
+	#define SPEC_GESTURE_CHAR_B             0x42
+	#define SPEC_GESTURE_CHAR_Q             0x43
+	#define SPEC_GESTURE_CHAR_L             0x44
+	#define SPEC_GESTURE_CHAR_P             0x45
+	#define SPEC_GESTURE_CHAR_S             0x46
+	#define SPEC_GESTURE_CHAR_U             0x47
 
-/* 0x5x*/
-#define SPEC_GESTURE_SIGN_AT            		0x50
-#define SPEC_GESTURE_SIGN_ARROW_LEFT    	0x51
-#define SPEC_GESTURE_SIGN_ARROW_RIGHT   	0x52
-#define SPEC_GESTURE_SIGN_ARROW_UP      	0x53
-#define SPEC_GESTURE_SIGN_ARROW_DOWN    0x54
-#define SPEC_GESTURE_SIGN_TRI_ANGLE     	0x55
+	/* 0x5x*/
+	#define SPEC_GESTURE_SIGN_AT            		0x50
+	#define SPEC_GESTURE_SIGN_ARROW_LEFT    	0x51
+	#define SPEC_GESTURE_SIGN_ARROW_RIGHT   	0x52
+	#define SPEC_GESTURE_SIGN_ARROW_UP      	0x53
+	#define SPEC_GESTURE_SIGN_ARROW_DOWN    0x54
+	#define SPEC_GESTURE_SIGN_TRI_ANGLE     	0x55
 
-/* 0x6x*/
-#define SPEC_GESTURE_NUMBER_3            0x60
-#define SPEC_GESTURE_NUMBER_6            0x61
-#define SPEC_GESTURE_NUMBER_9            0x62
-#define SPEC_GESTURE_NUMBER_7            0x63
-#define SPEC_GESTURE_NUMBER_8            0x64
-#define SPEC_GESTURE_NUMBER_2            0x65
+	/* 0x6x*/
+	#define SPEC_GESTURE_NUMBER_3            0x60
+	#define SPEC_GESTURE_NUMBER_6            0x61
+	#define SPEC_GESTURE_NUMBER_9            0x62
+	#define SPEC_GESTURE_NUMBER_7            0x63
+	#define SPEC_GESTURE_NUMBER_8            0x64
+	#define SPEC_GESTURE_NUMBER_2            0x65
 
 
-#define KEY_GESTURE_LINE_HORIZ_LEFT    		KEY_LEFT
-#define KEY_GESTURE_LINE_HORIZ_RIGHT   	KEY_RIGHT
-#define KEY_GESTURE_LINE_VERT_UP       		KEY_UP
-#define KEY_GESTURE_LINE_VERT_DOWN     	KEY_DOWN
-#define KEY_GESTURE_DOUBLE_CLICK       		KEY_X
+	#define KEY_GESTURE_LINE_HORIZ_LEFT    		KEY_LEFT
+	#define KEY_GESTURE_LINE_HORIZ_RIGHT   	KEY_RIGHT
+	#define KEY_GESTURE_LINE_VERT_UP       		KEY_UP
+	#define KEY_GESTURE_LINE_VERT_DOWN     	KEY_DOWN
+	#define KEY_GESTURE_DOUBLE_CLICK       		KEY_X
 
-/* Character */
-/* 0x3x*/
-#define KEY_GESTURE_CHAR_O             KEY_O
-#define KEY_GESTURE_CHAR_W             KEY_W
-#define KEY_GESTURE_CHAR_M             KEY_M
-#define KEY_GESTURE_CHAR_E             KEY_E
-#define KEY_GESTURE_CHAR_C             KEY_C
-#define KEY_GESTURE_CHAR_G             KEY_G
-#define KEY_GESTURE_CHAR_A             KEY_A
-#define KEY_GESTURE_CHAR_D             KEY_D
+	/* Character */
+	/* 0x3x*/
+	#define KEY_GESTURE_CHAR_O             KEY_O
+	#define KEY_GESTURE_CHAR_W             KEY_W
+	#define KEY_GESTURE_CHAR_M             KEY_M
+	#define KEY_GESTURE_CHAR_E             KEY_E
+	//#define KEY_GESTURE_CHAR_C             KEY_C
+	//#define KEY_GESTURE_CHAR_G             KEY_G
+	#define KEY_GESTURE_CHAR_A             KEY_A
+	#define KEY_GESTURE_CHAR_D             KEY_D
 
-/* 0x4x*/
-#define KEY_GESTURE_CHAR_N             KEY_N
-#define KEY_GESTURE_CHAR_Z             KEY_Z
-#define KEY_GESTURE_CHAR_B             KEY_B
-#define KEY_GESTURE_CHAR_Q             KEY_Q
-#define KEY_GESTURE_CHAR_L             KEY_L
-#define KEY_GESTURE_CHAR_P             KEY_P
-#define KEY_GESTURE_CHAR_S             KEY_S
-#define KEY_GESTURE_CHAR_U             KEY_U
+	/* 0x4x*/
+	#define KEY_GESTURE_CHAR_N             KEY_N
+	//#define KEY_GESTURE_CHAR_Z             KEY_Z
+	#define KEY_GESTURE_CHAR_B             KEY_B
+	//#define KEY_GESTURE_CHAR_Q             KEY_Q
+	#define KEY_GESTURE_CHAR_L             KEY_L
+	#define KEY_GESTURE_CHAR_P             KEY_P
+	#define KEY_GESTURE_CHAR_S             KEY_S
+	#define KEY_GESTURE_CHAR_U             KEY_U
 
-/* 0x5x*/
-#define KEY_GESTURE_SIGN_AT            			KEY_ENTER
-#define KEY_GESTURE_SIGN_ARROW_LEFT    	KEY_LEFTCTRL
-#define KEY_GESTURE_SIGN_ARROW_RIGHT   	KEY_RIGHTCTRL
-#define KEY_GESTURE_SIGN_ARROW_UP      	KEY_PAGEUP
-#define KEY_GESTURE_SIGN_ARROW_DOWN    	KEY_PAGEDOWN
-#define KEY_GESTURE_SIGN_TRI_ANGLE     		KEY_MACRO
+	/* 0x5x*/
+	#define KEY_GESTURE_SIGN_AT            			KEY_ENTER
+	#define KEY_GESTURE_SIGN_ARROW_LEFT    	KEY_LEFTCTRL
+	#define KEY_GESTURE_SIGN_ARROW_RIGHT   	KEY_RIGHTCTRL
+	#define KEY_GESTURE_SIGN_ARROW_UP      	KEY_PAGEUP
+	#define KEY_GESTURE_SIGN_ARROW_DOWN    	KEY_PAGEDOWN
+	//#define KEY_GESTURE_SIGN_TRI_ANGLE     		KEY_MACRO
 
-/* 0x6x*/
-#define KEY_GESTURE_NUMBER_3            KEY_3
-#define KEY_GESTURE_NUMBER_6            KEY_6
-#define KEY_GESTURE_NUMBER_9            KEY_9
-#define KEY_GESTURE_NUMBER_7            KEY_7
-#define KEY_GESTURE_NUMBER_8            KEY_8
-#define KEY_GESTURE_NUMBER_2            KEY_2
+	/* 0x6x*/
+	#define KEY_GESTURE_NUMBER_3            KEY_3
+	#define KEY_GESTURE_NUMBER_6            KEY_6
+	#define KEY_GESTURE_NUMBER_9            KEY_9
+	#define KEY_GESTURE_NUMBER_7            KEY_7
+	#define KEY_GESTURE_NUMBER_8            KEY_8
+	#define KEY_GESTURE_NUMBER_2            KEY_2
 	
 
 	unsigned short coordinate_x[150] = {0};
@@ -212,15 +212,15 @@ struct fts_keys shizhong_fts_keys[] =
 	{SPEC_GESTURE_CHAR_W,                 KEY_GESTURE_CHAR_W},          
 	{SPEC_GESTURE_CHAR_M,                 KEY_GESTURE_CHAR_M},          
 	{SPEC_GESTURE_CHAR_E,                 KEY_GESTURE_CHAR_E},          
-	{SPEC_GESTURE_CHAR_C,                 KEY_GESTURE_CHAR_C},          
-	{SPEC_GESTURE_CHAR_G,                 KEY_GESTURE_CHAR_G},          
+	//{SPEC_GESTURE_CHAR_C,                 KEY_GESTURE_CHAR_C},          
+	//{SPEC_GESTURE_CHAR_G,                 KEY_GESTURE_CHAR_G},          
 	{SPEC_GESTURE_CHAR_A,                 KEY_GESTURE_CHAR_A},          
 	{SPEC_GESTURE_CHAR_D,                 KEY_GESTURE_CHAR_D},          
 	                                                                
 	{SPEC_GESTURE_CHAR_N,                 KEY_GESTURE_CHAR_N},          
-	{SPEC_GESTURE_CHAR_Z,                 KEY_GESTURE_CHAR_Z},          
+	//{SPEC_GESTURE_CHAR_Z,                 KEY_GESTURE_CHAR_Z},          
 	{SPEC_GESTURE_CHAR_B,                 KEY_GESTURE_CHAR_B},          
-	{SPEC_GESTURE_CHAR_Q,                 KEY_GESTURE_CHAR_Q},          
+	//{SPEC_GESTURE_CHAR_Q,                 KEY_GESTURE_CHAR_Q},          
 	{SPEC_GESTURE_CHAR_L,                 KEY_GESTURE_CHAR_L},          
 	{SPEC_GESTURE_CHAR_P,                 KEY_GESTURE_CHAR_P},          
 	{SPEC_GESTURE_CHAR_S,                 KEY_GESTURE_CHAR_S},          
@@ -231,7 +231,7 @@ struct fts_keys shizhong_fts_keys[] =
 	{SPEC_GESTURE_SIGN_ARROW_RIGHT,      KEY_GESTURE_SIGN_ARROW_RIGHT},
 	{SPEC_GESTURE_SIGN_ARROW_UP,          	KEY_GESTURE_SIGN_ARROW_UP},   
 	{SPEC_GESTURE_SIGN_ARROW_DOWN,     	KEY_GESTURE_SIGN_ARROW_DOWN}, 
-	{SPEC_GESTURE_SIGN_TRI_ANGLE,         	KEY_GESTURE_SIGN_TRI_ANGLE},  
+	//{SPEC_GESTURE_SIGN_TRI_ANGLE,         	KEY_GESTURE_SIGN_TRI_ANGLE},  
 	                                                                
 	{SPEC_GESTURE_NUMBER_3,               KEY_GESTURE_NUMBER_3},        
 	{SPEC_GESTURE_NUMBER_6,               KEY_GESTURE_NUMBER_6},        

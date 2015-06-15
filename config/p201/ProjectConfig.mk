@@ -28,7 +28,7 @@ BUILD_PRELOADER=yes
 BUILD_UBOOT=no
 
 # User can input ASCII string which is showed in About phone and bootimg header.
-CUSTOM_BUILD_VERNO=X1_0.6_20150506
+CUSTOM_BUILD_VERNO=X1_1.4_20150610
 
 # it is used to decide MT6620 combo chip BT and WiFi antenna architecture.  The meaning of each value is defined as follows. Please note that "CUSTOM_HAL_ANT" setting must be consistent with customer's MT6620 antenna architecture layout. Improper setting may lead to BT/WiFi malfunctions
 CUSTOM_HAL_ANT=mt6582_ant_m1
@@ -377,7 +377,7 @@ MTK_BENCHMARK_BOOST_TP=no
 MTK_BESLOUDNESS_SUPPORT=no
 MTK_BG_POWER_SAVING_SUPPORT=no
 MTK_BG_POWER_SAVING_UI_SUPPORT=no
-MTK_BICR_SUPPORT=yes
+MTK_BICR_SUPPORT=no
 
 # Support TCP server and TCP client mode channel
 # Support multiple channels for BIP
@@ -783,7 +783,7 @@ MTK_GEMINI_3SIM_SUPPORT=no
 MTK_GEMINI_4SIM_SUPPORT=no
 
 # Add MTK_GEMINI_SMART_3G_SWITCH feature.
-MTK_GEMINI_SMART_3G_SWITCH=2
+MTK_GEMINI_SMART_3G_SWITCH=0
 
 # To identify which GPS chip be used on current platform.
 MTK_GPS_CHIP=MTK_GPS_MT6582
@@ -1541,7 +1541,7 @@ MTK_FD_FORCE_REL_SUPPORT=yes
 MTK_FD_SUPPORT=yes
 
 # Enable or disable the 3G Switch feature
-MTK_GEMINI_3G_SWITCH=yes
+MTK_GEMINI_3G_SWITCH=no
 
 # For Platform: MT6573, MT6575 If it is equal to "modem_2g", means only support 2g modem. If it is equal to "modem_3g", means  support 2g and 3g modem
 MTK_MODEM_SUPPORT=
@@ -1564,13 +1564,13 @@ MTK_FM_SUPPORT=yes
 MTK_FM_TX_SUPPORT=no
 
 # Support GEMINI or not
-GEMINI=yes
+GEMINI=no
 
 # Enable or disable the GEMINI enhancement
-MTK_GEMINI_ENHANCEMENT=yes
+MTK_GEMINI_ENHANCEMENT=no
 
 # Extend our Gemini feature to support daul RIL with single modem logistic.
-MTK_SHARE_MODEM_CURRENT=2
+MTK_SHARE_MODEM_CURRENT=1
 
 # Capability of the underlay modem
 #  single or gemini

@@ -1,0 +1,5 @@
+custom/p201/kernel/dct/dct/*.h
+custom/p201/kernel/dct/dct/*.c
+platform/mt6582/lk/p.c
+dct/DCT.log
+preloader/preloader_p201.bin

@@ -89,7 +89,13 @@ static const int number_pic_size = (NUMBER_RIGHT - NUMBER_LEFT)*(NUMBER_BOTTOM -
 // line parameter
 static const int line_pic_size = (TOP_ANIMATION_RIGHT - TOP_ANIMATION_LEFT)*2;
 
-
+/* add by huangchao */
+void mt_disp_set_rect(unsigned int order, unsigned int offset,
+	RECT_REGION_T number_rect, 
+	RECT_REGION_T percent_rect, 
+	RECT_REGION_T capacity_rect,
+	RECT_REGION_T top_rect,
+	RECT_REGION_T old_rect);
 
 void fill_animation_logo(unsigned int index, void *fill_addr, void * dec_logo_addr, void * logo_addr, LCM_SCREEN_T phical_screen);
 void fill_animation_prog_bar(RECT_REGION_T rect_bar,

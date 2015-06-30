@@ -50,13 +50,40 @@ static int charging_animation_index = 0;
 #define CHECK_LOGO_BIN_OK  0
 #define CHECK_LOGO_BIN_ERROR  -1
 
-
+#if 0
 static unsigned short  number_pic_addr[(NUMBER_RIGHT - NUMBER_LEFT)*(NUMBER_BOTTOM - NUMBER_TOP)*2] = {0x0}; //addr
 static unsigned short  line_pic_addr[(TOP_ANIMATION_RIGHT - TOP_ANIMATION_LEFT)*2] = {0x0};
 static unsigned short  percent_pic_addr[(PERCENT_RIGHT - PERCENT_LEFT)*(PERCENT_BOTTOM - PERCENT_TOP)*2] = {0x0};
 static unsigned short  top_animation_addr[(TOP_ANIMATION_RIGHT - TOP_ANIMATION_LEFT)*(TOP_ANIMATION_BOTTOM - TOP_ANIMATION_TOP)*2] = {0x0};
+#endif
 
+/* add by huangchao */
+static RECT_REGION_T battery_number_rect = {NUMBER_LEFT, NUMBER_TOP, NUMBER_RIGHT, NUMBER_BOTTOM};
+static RECT_REGION_T battery_percent_rect = {PERCENT_LEFT, PERCENT_TOP, PERCENT_RIGHT, PERCENT_BOTTOM};
+static RECT_REGION_T battery_capacity_rect = {CAPACITY_LEFT, CAPACITY_TOP, CAPACITY_RIGHT, CAPACITY_BOTTOM};
+static RECT_REGION_T top_animation_rect = {TOP_ANIMATION_LEFT, TOP_ANIMATION_TOP, TOP_ANIMATION_RIGHT, TOP_ANIMATION_BOTTOM};
+static RECT_REGION_T old_animation_rect = {BAR_LEFT, BAR_TOP, BAR_RIGHT, BAR_BOTTOM};
+static unsigned short *pic_addr;
+static unsigned int logo_order = 0;
+static unsigned int logo_offset = 0;
 
+void mt_disp_set_rect(unsigned int order, unsigned int offset,
+	RECT_REGION_T number_rect, 
+	RECT_REGION_T percent_rect, 
+	RECT_REGION_T capacity_rect,
+	RECT_REGION_T top_rect,
+	RECT_REGION_T old_rect)
+{
+	logo_order = order;
+	logo_offset = offset;
+	memcpy(&battery_number_rect, &number_rect, sizeof(RECT_REGION_T));
+	memcpy(&battery_percent_rect, &percent_rect, sizeof(RECT_REGION_T));
+	memcpy(&battery_capacity_rect, &capacity_rect, sizeof(RECT_REGION_T));
+	memcpy(&top_animation_rect, &top_rect, sizeof(RECT_REGION_T));
+	memcpy(&old_animation_rect, &old_rect, sizeof(RECT_REGION_T));
+	
+}
+/* end huangchao */
 
 /*
  * Check logo.bin address if valid, and get logo related info
@@ -99,6 +126,8 @@ void fill_animation_logo(unsigned int index, void *fill_addr, void * dec_logo_ad
     LOGO_PARA_T logo_info;
 	int logo_width;
     int logo_height;
+
+    index += logo_offset;
     if(check_logo_index_valid(index, logo_addr, &logo_info) != CHECK_LOGO_BIN_OK)
         return; 
               
@@ -151,6 +180,7 @@ void fill_animation_prog_bar(RECT_REGION_T rect_bar,
 void fill_animation_dynamic(unsigned int index, RECT_REGION_T rect, void *fill_addr, void * dec_logo_addr, void * logo_addr, LCM_SCREEN_T phical_screen)
 {
     LOGO_PARA_T logo_info;
+    index += logo_offset;
     if(check_logo_index_valid(index, logo_addr, &logo_info) != CHECK_LOGO_BIN_OK)
         return; 
                     
@@ -169,19 +199,27 @@ void fill_animation_number(unsigned int index, unsigned int number_position, voi
     LOG_ANIM("[show_animation_common: %s %d]index= %d, number_position = %d\n",__FUNCTION__,__LINE__, index, number_position);
 
     LOGO_PARA_T logo_info;
+    index += logo_offset;
     if(check_logo_index_valid(index, logo_addr, &logo_info) != CHECK_LOGO_BIN_OK)
         return;                 
 
     // draw default number rect,
+    int number_pic_size = (battery_number_rect.right - battery_number_rect.left)*(battery_number_rect.bottom - battery_number_rect.top)*2;
+    unsigned short  number_pic_addr[number_pic_size]; 
     decompress_logo((void*)logo_info.inaddr, (void*)number_pic_addr, logo_info.logolen, number_pic_size);
 
     //static RECT_REGION_T number_location_rect = {NUMBER_LEFT,NUMBER_TOP,NUMBER_RIGHT,NUMBER_BOTTOM};    
-    RECT_REGION_T battery_number_rect = {NUMBER_LEFT + (NUMBER_RIGHT - NUMBER_LEFT)*number_position,
+    /*RECT_REGION_T battery_number_rect = {NUMBER_LEFT + (NUMBER_RIGHT - NUMBER_LEFT)*number_position,
                             NUMBER_TOP,
                             NUMBER_RIGHT + (NUMBER_RIGHT - NUMBER_LEFT)*number_position,
-                            NUMBER_BOTTOM};   
+                            NUMBER_BOTTOM};   */
+     RECT_REGION_T number_rect = {battery_number_rect.left + (battery_number_rect.right - battery_number_rect.left)*number_position,
+                            battery_number_rect.top,
+                            battery_number_rect.right + (battery_number_rect.right - battery_number_rect.left)*number_position,
+                            battery_number_rect.bottom};
                                                      
-    fill_rect_with_content(fill_addr, battery_number_rect, (unsigned short *)number_pic_addr,phical_screen);            
+    //fill_rect_with_content(fill_addr, battery_number_rect, (unsigned short *)number_pic_addr,phical_screen);
+    fill_rect_with_content(fill_addr, number_rect, (unsigned short *)number_pic_addr, phical_screen);
 }
 
 /*
@@ -191,14 +229,19 @@ void fill_animation_number(unsigned int index, unsigned int number_position, voi
 void fill_animation_line(unsigned int index, unsigned int capacity_grids, void *fill_addr,  void * logo_addr, LCM_SCREEN_T phical_screen)
 {    
     LOGO_PARA_T logo_info;
+    index += logo_offset;
     if(check_logo_index_valid(index, logo_addr, &logo_info) != CHECK_LOGO_BIN_OK)
         return; 
-                
+
+    int line_pic_size = (top_animation_rect.right - top_animation_rect.left) * 2;
+    unsigned short  line_pic_addr[line_pic_size];
     decompress_logo((void*)logo_info.inaddr, (void*)line_pic_addr, logo_info.logolen, line_pic_size);
 
-    RECT_REGION_T rect = {CAPACITY_LEFT, CAPACITY_TOP, CAPACITY_RIGHT, CAPACITY_BOTTOM}; 
+    //RECT_REGION_T rect = {CAPACITY_LEFT, CAPACITY_TOP, CAPACITY_RIGHT, CAPACITY_BOTTOM}; 
+    RECT_REGION_T rect = {battery_capacity_rect.left, battery_capacity_rect.top, battery_capacity_rect.right, battery_capacity_rect.bottom}; 
     int i = capacity_grids;
-    for(; i < CAPACITY_BOTTOM; i++)
+    //for(; i < CAPACITY_BOTTOM; i++)
+    for(; i < battery_capacity_rect.bottom; i++)
     {      
         rect.top = i;
         rect.bottom = i+1;                                             
@@ -231,7 +274,8 @@ void fill_animation_battery_ver_0(unsigned int capacity,  void *fill_addr, void 
     // Fill Occupied Color
 
     //RECT_REGION_T bar_rect = {BAR_LEFT, BAR_TOP, BAR_RIGHT, BAR_BOTTOM};    
-    RECT_REGION_T rect_bar = {bar_rect.left + 1, bar_rect.top + 1, bar_rect.right, bar_rect.bottom};
+    //RECT_REGION_T rect_bar = {bar_rect.left + 1, bar_rect.top + 1, bar_rect.right, bar_rect.bottom};
+    RECT_REGION_T rect_bar = {old_animation_rect.left + 1, old_animation_rect.top + 1, old_animation_rect.right, old_animation_rect.bottom};
     
 //    RECT_REGION_T rect_bar = {BAR_LEFT + 1, BAR_TOP + 1,BAR_RIGHT, BAR_BOTTOM};
     
@@ -265,7 +309,8 @@ void fill_animation_battery_ver_1(unsigned int capacity, void *fill_addr, void *
                 
         fill_animation_logo(LOW_BAT_ANIM_START_0 + charging_low_index, fill_addr, dec_logo_addr, logo_addr,phical_screen);
         fill_animation_number(NUMBER_PIC_START_0 + capacity, 1, fill_addr, logo_addr, phical_screen);
-        fill_animation_dynamic(NUMBER_PIC_PERCENT, percent_location_rect, fill_addr, percent_pic_addr, logo_addr, phical_screen);
+        //fill_animation_dynamic(NUMBER_PIC_PERCENT, percent_location_rect, fill_addr, percent_pic_addr, logo_addr, phical_screen);
+        fill_animation_dynamic(NUMBER_PIC_PERCENT, battery_percent_rect, fill_addr, dec_logo_addr, logo_addr, phical_screen);
         
         if (charging_low_index >= 9) charging_low_index = 0;
 
@@ -273,7 +318,8 @@ void fill_animation_battery_ver_1(unsigned int capacity, void *fill_addr, void *
 
         unsigned int capacity_grids = 0;
         //static RECT_REGION_T battery_rect = {CAPACITY_LEFT,CAPACITY_TOP,CAPACITY_RIGHT,CAPACITY_BOTTOM};
-        capacity_grids = CAPACITY_BOTTOM - (CAPACITY_BOTTOM - CAPACITY_TOP) * (capacity - 10) / 90;
+        //capacity_grids = CAPACITY_BOTTOM - (CAPACITY_BOTTOM - CAPACITY_TOP) * (capacity - 10) / 90;
+        capacity_grids = battery_capacity_rect.bottom - (battery_capacity_rect.bottom - battery_capacity_rect.top) * (capacity - 10) / 90;
         LOG_ANIM("[show_animation_common: %s %d]capacity_grids : %d,charging_animation_index = %d\n",__FUNCTION__,__LINE__, capacity_grids,charging_animation_index);   
 
         //background 
@@ -282,17 +328,24 @@ void fill_animation_battery_ver_1(unsigned int capacity, void *fill_addr, void *
         fill_animation_line(ANIM_LINE_INDEX, capacity_grids, fill_addr,  logo_addr, phical_screen);
         fill_animation_number(NUMBER_PIC_START_0 + (capacity/10), 0, fill_addr, logo_addr, phical_screen);
         fill_animation_number(NUMBER_PIC_START_0 + (capacity%10), 1, fill_addr, logo_addr, phical_screen);
-        fill_animation_dynamic(NUMBER_PIC_PERCENT, percent_location_rect, fill_addr, percent_pic_addr, logo_addr, phical_screen);                
+        //fill_animation_dynamic(NUMBER_PIC_PERCENT, percent_location_rect, fill_addr, percent_pic_addr, logo_addr, phical_screen);
+        fill_animation_dynamic(NUMBER_PIC_PERCENT, battery_percent_rect, fill_addr, dec_logo_addr, logo_addr, phical_screen);
         
         
          if (capacity <= 90)
          {
-            RECT_REGION_T top_animation_rect = {TOP_ANIMATION_LEFT, capacity_grids - (TOP_ANIMATION_BOTTOM - TOP_ANIMATION_TOP), TOP_ANIMATION_RIGHT, capacity_grids};
+            //RECT_REGION_T top_animation_rect = {TOP_ANIMATION_LEFT, capacity_grids - (TOP_ANIMATION_BOTTOM - TOP_ANIMATION_TOP), TOP_ANIMATION_RIGHT, capacity_grids};
+            RECT_REGION_T top_rect;
+	     top_rect.left = top_animation_rect.left;
+	     top_rect.top = capacity_grids - (top_animation_rect.bottom - top_animation_rect.top);
+	     top_rect.right= top_animation_rect.right;
+	     top_rect.bottom = capacity_grids;
             //top_animation_rect.bottom = capacity_grids;
             //top_animation_rect.top = capacity_grids - top_animation_height;
             charging_animation_index++;        
             //show_animation_dynamic(15 + charging_animation_index, top_animation_rect, top_animation_addr);
-            fill_animation_dynamic(BAT_ANIM_START_0 + charging_animation_index, top_animation_rect, fill_addr, top_animation_addr, logo_addr, phical_screen);  
+            //fill_animation_dynamic(BAT_ANIM_START_0 + charging_animation_index, top_animation_rect, fill_addr, top_animation_addr, logo_addr, phical_screen);  
+            fill_animation_dynamic(BAT_ANIM_START_0 + charging_animation_index, top_rect, fill_addr, dec_logo_addr, logo_addr, phical_screen);  
             
             if (charging_animation_index >= 9) charging_animation_index = 0;
          }
@@ -358,55 +411,6 @@ void fill_animation_battery_ver_1(unsigned int capacity, void *fill_addr, void *
     }
 }
 
-void fill_animation_battery_ver_3(unsigned int capacity, void *fill_addr, void * dec_logo_addr, void * logo_addr, LCM_SCREEN_T phical_screen)
-{
-    LOG_ANIM("[show_animation_common: %s %d]capacity : %d\n",__FUNCTION__,__LINE__, capacity);
-    
-    if (capacity >= 100) {
-        //show_logo(37); // battery 100
-        fill_animation_logo(FULL_BATTERY_INDEX + KERNEL_LOGO_INDEX + 1, fill_addr, dec_logo_addr, logo_addr,phical_screen);
-     
-    } else if (capacity < 10) {
-        LOG_ANIM("[show_animation_common: %s %d]charging_low_index = %d\n",__FUNCTION__,__LINE__, charging_low_index);  
-        charging_low_index ++ ;
-                
-        fill_animation_logo(LOW_BAT_ANIM_START_0 + KERNEL_LOGO_INDEX + 1 + charging_low_index, fill_addr, dec_logo_addr, logo_addr,phical_screen);
-        fill_animation_number(NUMBER_PIC_START_0 + KERNEL_LOGO_INDEX + 1 + capacity, 1, fill_addr, logo_addr, phical_screen);
-        fill_animation_dynamic(NUMBER_PIC_PERCENT + KERNEL_LOGO_INDEX + 1, percent_location_rect, fill_addr, percent_pic_addr, logo_addr, phical_screen);
-        
-        if (charging_low_index >= 9) charging_low_index = 0;
-
-    } else {
-
-        unsigned int capacity_grids = 0;
-        //static RECT_REGION_T battery_rect = {CAPACITY_LEFT,CAPACITY_TOP,CAPACITY_RIGHT,CAPACITY_BOTTOM};
-        capacity_grids = CAPACITY_BOTTOM - (CAPACITY_BOTTOM - CAPACITY_TOP) * (capacity - 10) / 90;
-        LOG_ANIM("[show_animation_common: %s %d]capacity_grids : %d,charging_animation_index = %d\n",__FUNCTION__,__LINE__, capacity_grids,charging_animation_index);   
-
-        //background 
-        fill_animation_logo(ANIM_V1_BACKGROUND_INDEX + KERNEL_LOGO_INDEX + 1, fill_addr, dec_logo_addr, logo_addr,phical_screen);
-        
-        fill_animation_line(ANIM_LINE_INDEX + KERNEL_LOGO_INDEX + 1, capacity_grids, fill_addr,  logo_addr, phical_screen);
-        fill_animation_number(NUMBER_PIC_START_0 + KERNEL_LOGO_INDEX + 1 + (capacity/10), 0, fill_addr, logo_addr, phical_screen);
-        fill_animation_number(NUMBER_PIC_START_0 + KERNEL_LOGO_INDEX + 1 + (capacity%10), 1, fill_addr, logo_addr, phical_screen);
-        fill_animation_dynamic(NUMBER_PIC_PERCENT + KERNEL_LOGO_INDEX + 1, percent_location_rect, fill_addr, percent_pic_addr, logo_addr, phical_screen);                
-        
-        
-         if (capacity <= 90)
-         {
-            RECT_REGION_T top_animation_rect = {TOP_ANIMATION_LEFT, capacity_grids - (TOP_ANIMATION_BOTTOM - TOP_ANIMATION_TOP), TOP_ANIMATION_RIGHT, capacity_grids};
-            //top_animation_rect.bottom = capacity_grids;
-            //top_animation_rect.top = capacity_grids - top_animation_height;
-            charging_animation_index++;        
-            //show_animation_dynamic(15 + charging_animation_index, top_animation_rect, top_animation_addr);
-            fill_animation_dynamic(BAT_ANIM_START_0 + KERNEL_LOGO_INDEX + 1 + charging_animation_index, top_animation_rect, fill_addr, top_animation_addr, logo_addr, phical_screen);  
-            
-            if (charging_animation_index >= 9) charging_animation_index = 0;
-         }
-    }
-
-}
-
 /*
  * Show charging animation by version
  *
@@ -428,11 +432,7 @@ void fill_animation_battery_by_ver(unsigned int capacity,void *fill_addr, void *
         case WIRELESS_CHARGING_ANIM_VER:
             fill_animation_battery_ver_2(capacity, fill_addr, dec_logo_addr, logo_addr, phical_screen);
 
-	     break;
-	 case EXPAND_CHARGING_ANIM_VER:
-            fill_animation_battery_ver_3(capacity, fill_addr, dec_logo_addr, logo_addr, phical_screen);
-            
-            break;            
+	     break;        
         default:
             fill_animation_battery_ver_0(capacity, fill_addr, dec_logo_addr, logo_addr, phical_screen);
             

@@ -524,6 +524,9 @@ typedef struct
     LCM_DSI_PARAMS dsi;
     unsigned int physical_width;
     unsigned int physical_height;
+
+	/* add by huangchao */
+	unsigned int		lcm_order;
 } LCM_PARAMS;
 
 

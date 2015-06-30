@@ -412,6 +412,7 @@ static void lcm_get_params(LCM_PARAMS *params)
     memset(params, 0, sizeof(LCM_PARAMS));
     
     params->type   = LCM_TYPE_DSI;
+    params->lcm_order = 0;
     
     params->width  = FRAME_WIDTH;
     params->height = FRAME_HEIGHT;

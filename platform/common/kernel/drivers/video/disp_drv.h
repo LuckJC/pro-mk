@@ -98,6 +98,7 @@ UINT32 DISP_GetPhysicalWidth(void);
 UINT32 DISP_GetPhysicalHeight(void);
 UINT32 DISP_GetScreenBpp(void);
 UINT32 DISP_GetPages(void);
+UINT32 DISP_GetScreenOrder(void);
 DISP_STATUS DISP_SetScreenBpp(UINT32);   ///config how many bits for each pixel of framebuffer
 DISP_STATUS DISP_SetPages(UINT32);         ///config how many framebuffer will be used
 ///above information is used to determine the vRAM size

@@ -190,9 +190,10 @@ static void lcm_get_params(LCM_PARAMS *params)
 		memset(params, 0, sizeof(LCM_PARAMS));
 
 		params->type   = LCM_TYPE_DSI;
+		params->lcm_order = 1;
 
-		params->width  = FRAME_WIDTH;
-		params->height = FRAME_HEIGHT;
+		params->width  = FRAME_WIDTH/*540*/;
+		params->height = FRAME_HEIGHT/*960*/;
 
 		// enable tearing-free
 		params->dbi.te_mode 				= LCM_DBI_TE_MODE_VSYNC_ONLY;
@@ -708,11 +709,13 @@ static void lcm_init(void)
     SET_RESET_PIN(1);
     MDELAY(150);
 #else
-	#if defined(BUILD_LK)
+#if defined(BUILD_LK)
 	printf("------------------lcm_init\n");
-	#endif
+#else
+	printk("------------------lcm_init\n");
+#endif
 
-	mt_set_gpio_out(GPIO126,1);
+
 	mt_set_gpio_out(GPIO119,1);
 	MDELAY(20); 
 	//SET_RESET_PIN(0);
@@ -739,11 +742,11 @@ static void lcm_suspend(void)
 	SET_RESET_PIN(1);
 	MDELAY(150);
 #else
-	#if defined(BUILD_LK)
+#if defined(BUILD_LK)
 	printf("------------------lcm_suspend\n");
-	#endif
-	//printk(0, "------------------lcm_suspend\n");
-	mt_set_gpio_out(GPIO126,1);
+#else
+	printk("------------------lcm_suspend\n");
+#endif
 	mt_set_gpio_out(GPIO119,1);
 	MDELAY(20); 
 	//SET_RESET_PIN(0);
@@ -760,8 +763,10 @@ static void lcm_resume(void)
 {
 #if defined(BUILD_LK)
 	printf("------------------lcm_resume\n");
+#else
+	printk("------------------lcm_resume\n");
 #endif
-	mt_set_gpio_out(GPIO126,1);
+
 	lcm_init();
 }
 

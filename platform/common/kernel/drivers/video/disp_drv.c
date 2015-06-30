@@ -2461,6 +2461,19 @@ UINT32 DISP_GetPages(void)
     return disp_fb_pages;   // Double Buffers
 }
 
+/* add by huanchao */
+UINT32 DISP_GetScreenOrder(void)
+{
+    disp_drv_init_context();
+    if(lcm_params)
+        return lcm_params->lcm_order;
+    else
+    {
+        printk("WARNING!! get screen order before display driver inited!\n");
+        return 0;
+    }
+}
+/* end huanchao */
 
 BOOL DISP_IsDirectLinkMode(void)
 {

@@ -85,7 +85,52 @@ void init_fb_screen()
 {
     dprintf(INFO, "[lk logo: %s %d]\n",__FUNCTION__,__LINE__);
     unsigned int fb_size = mt_get_fb_size();
+    unsigned int logo_order = 0;
+    unsigned int logo_offset = 0;
+
     logo_addr = mt_get_logo_db_addr();
+
+    /* add by huangchao */
+    unsigned int *pinfo = (unsigned int*)logo_addr;
+    unsigned int logonum = ANIM_V0_LOGO_NUM;
+    switch(pinfo[0])
+    {
+        case ANIM_V0_LOGO_NUM:
+	 case ANIM_V0_LOGO_NUM * 2: 
+	 	logonum = ANIM_V0_LOGO_NUM; 
+		break;
+	 case ANIM_V1_LOGO_NUM:
+	 case ANIM_V1_LOGO_NUM * 2: 
+	 	logonum = ANIM_V1_LOGO_NUM; 
+		break;
+	 case ANIM_V2_LOGO_NUM:
+	 case ANIM_V2_LOGO_NUM * 2: 
+	 	logonum = ANIM_V2_LOGO_NUM; 
+		break;
+    }
+	
+    logo_order = DISP_GetScreenOrder();
+    //printf("[LK]pinfo[0]: %d, logo order: %d\n", pinfo[0], logo_order);
+    if(logo_order >= 1)
+    {
+        RECT_REGION_T number_rect = {NUMBER_LEFT2, NUMBER_TOP2, NUMBER_RIGHT2, NUMBER_BOTTOM2};
+        RECT_REGION_T percent_rect = {PERCENT_LEFT2, PERCENT_TOP2, PERCENT_RIGHT2, PERCENT_BOTTOM2};
+        RECT_REGION_T capacity_rect = {CAPACITY_LEFT2, CAPACITY_TOP2, CAPACITY_RIGHT2, CAPACITY_BOTTOM2};
+        RECT_REGION_T top_rect = {TOP_ANIMATION_LEFT2, TOP_ANIMATION_TOP2, TOP_ANIMATION_RIGHT2, TOP_ANIMATION_BOTTOM2};
+        RECT_REGION_T old_rect = {BAR_LEFT2, BAR_TOP2, BAR_RIGHT2, BAR_BOTTOM2};        
+
+        logo_offset = logonum;
+
+        //printf("[LK]logo offset: %d\n", logo_offset);
+
+	 mt_disp_set_rect(logo_order, logo_offset, 
+		number_rect,
+		percent_rect,
+		capacity_rect,
+		top_rect,
+		old_rect);
+    }
+    /* end huangchao */
 
     phical_screen.width = CFG_DISPLAY_WIDTH;
     phical_screen.height = CFG_DISPLAY_HEIGHT;
@@ -116,12 +161,12 @@ void init_fb_screen()
     sync_anim_version();
     if (show_animationm_ver == 1)
     {
-        unsigned int logonum;
-        unsigned int *db_addr = logo_addr;
+        //unsigned int logonum;
+        //unsigned int *db_addr = logo_addr;
     
-        unsigned int *pinfo = (unsigned int*)db_addr;
+        //unsigned int *pinfo = (unsigned int*)db_addr;
         
-        logonum = pinfo[0];
+        //logonum = pinfo[0];
         dprintf(INFO, "[lk logo: %s %d]pinfo[0]=0x%08x, pinfo[1]=0x%08x, pinfo[2]=%d\n", __FUNCTION__,__LINE__,
                     pinfo[0], pinfo[1], pinfo[2]);
     
@@ -168,11 +213,8 @@ void mt_disp_show_boot_logo(void)
     else
     {
         ///show_logo(0);
-        init_fb_screen();       	
-	 if(CFG_DISPLAY_WIDTH == 720)
-	 	fill_animation_logo(BOOT_LOGO_INDEX + KERNEL_LOGO_INDEX + 1, mt_get_fb_addr(), mt_get_tempfb_addr(), logo_addr, phical_screen);
-	 else
-	 	fill_animation_logo(BOOT_LOGO_INDEX, mt_get_fb_addr(), mt_get_tempfb_addr(), logo_addr, phical_screen);
+        init_fb_screen();
+	 fill_animation_logo(BOOT_LOGO_INDEX, mt_get_fb_addr(), mt_get_tempfb_addr(), logo_addr, phical_screen);
         mt_disp_update(0, 0, CFG_DISPLAY_WIDTH, CFG_DISPLAY_HEIGHT);
     }
 
@@ -217,7 +259,7 @@ void mt_disp_show_battery_full(void)
  */
 void mt_disp_show_battery_capacity(UINT32 capacity)
 {
-        dprintf(INFO, "[lk logo: %s %d]capacity =%d\n",__FUNCTION__,__LINE__, capacity);
+    dprintf(INFO, "[lk logo: %s %d]capacity =%d\n",__FUNCTION__,__LINE__, capacity);
     mt_logo_get_custom_if();
 
     if(logo_cust_if->show_battery_capacity)
@@ -226,13 +268,8 @@ void mt_disp_show_battery_capacity(UINT32 capacity)
     }
     else
     {     
-        init_fb_screen();
-        
-	 if(CFG_DISPLAY_WIDTH == 720)
-	 	fill_animation_battery_by_ver(capacity, mt_get_fb_addr(), mt_get_tempfb_addr(), logo_addr, phical_screen, 2); 
-	 else
-	 	fill_animation_battery_by_ver(capacity, mt_get_fb_addr(), mt_get_tempfb_addr(), logo_addr, phical_screen, show_animationm_ver); 
-                  
+        init_fb_screen();        
+	fill_animation_battery_by_ver(capacity, mt_get_fb_addr(), mt_get_tempfb_addr(), logo_addr, phical_screen, show_animationm_ver);                  
         mt_disp_update(0, 0, CFG_DISPLAY_WIDTH, CFG_DISPLAY_HEIGHT);
     }
 
@@ -254,10 +291,7 @@ void mt_disp_show_charger_ov_logo(void)
     else
     {
         init_fb_screen();
-	 if(CFG_DISPLAY_WIDTH == 720)
-        	fill_animation_logo(CHARGER_OV_INDEX + KERNEL_LOGO_INDEX + 1, mt_get_fb_addr(), mt_get_tempfb_addr(), logo_addr, phical_screen);
-	 else
-	 	fill_animation_logo(CHARGER_OV_INDEX, mt_get_fb_addr(), mt_get_tempfb_addr(), logo_addr, phical_screen);
+        fill_animation_logo(CHARGER_OV_INDEX, mt_get_fb_addr(), mt_get_tempfb_addr(), logo_addr, phical_screen);
 	 mt_disp_update(0, 0, CFG_DISPLAY_WIDTH, CFG_DISPLAY_HEIGHT);
     }
 
@@ -281,10 +315,7 @@ void mt_disp_show_low_battery(void)
     {
         init_fb_screen();
         //show_logo(2);
-        if(CFG_DISPLAY_WIDTH == 720)
-	 	fill_animation_logo(LOW_BATTERY_INDEX + KERNEL_LOGO_INDEX + 1, mt_get_fb_addr(), mt_get_tempfb_addr(), logo_addr, phical_screen);
-	 else
-        	fill_animation_logo(LOW_BATTERY_INDEX, mt_get_fb_addr(), mt_get_tempfb_addr(), logo_addr, phical_screen);
+	 fill_animation_logo(LOW_BATTERY_INDEX, mt_get_fb_addr(), mt_get_tempfb_addr(), logo_addr, phical_screen);
         mt_disp_update(0, 0, CFG_DISPLAY_WIDTH, CFG_DISPLAY_HEIGHT);
     }
 

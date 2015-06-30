@@ -131,6 +131,9 @@ static int draw_anim_mode = DRAW_ANIM_MODE_SURFACE;
 // kernel logo index may be different for different logo.bin
 static int kernel_logo_position = KERNEL_LOGO_INDEX ;
 
+// logo offset
+static int logo_offset = 0;
+
 // add a flag for exiting on abnormal case
 static int error_flag = 0;
 /*
@@ -204,9 +207,35 @@ void anim_deinit()
 void anim_logo_init(void)
 {
     // read and de-compress logo data here
-    int fd = 0;
+    int fd = 0, fd2 = 0;
     int len = 0;
     int mtdid = 0;
+    unsigned int logo_order = 0;
+    unsigned char buf[3];
+    unsigned int *pinfo;
+    int pcount;
+
+    /* add by huangchao */
+    fd2 = open("/sys/devices/platform/mtkfb.0/mtkfb_order", O_RDONLY);
+    if(fd2 < 0)
+    {
+        LOG_ANIM("[charging_animation: %s %d]open lcd order file fail, fd = %d \n",__FUNCTION__,__LINE__ , fd2);
+        error_flag = 1;
+        return;
+    }
+
+    len = read(fd2, buf, 3);
+    if (len < 0)
+    {
+        LOG_ANIM("[charging_animation: %s %d]read from lcd order for 3B is failed! \n",__FUNCTION__,__LINE__);
+        close(fd2);
+        error_flag = 1;
+	 return;
+    }
+    close(fd2);
+    logo_order = buf[0] - '0';
+    printf("[charging_animation: %s %d]read from lcd order: %d \n",__FUNCTION__,__LINE__, logo_order);
+     /* end huangchao */
 
     fd = open("/dev/logo", O_RDONLY);
     if(fd < 0)
@@ -239,17 +268,55 @@ void anim_logo_init(void)
     }
     close(fd);
 
-    if (show_animationm_ver > 0)
+    /* add by huangchao */
+    pinfo = (unsigned int*)logo_addr;
+    pcount = ANIM_V0_LOGO_NUM;
+    switch(pinfo[0])
     {
-        unsigned int *pinfo = (unsigned int*)logo_addr;         
+        case ANIM_V0_LOGO_NUM:
+	 case ANIM_V0_LOGO_NUM * 2: 
+	 	pcount = ANIM_V0_LOGO_NUM; 
+		break;
+	 case ANIM_V1_LOGO_NUM:
+	 case ANIM_V1_LOGO_NUM * 2: 
+	 	pcount = ANIM_V1_LOGO_NUM; 
+		break;
+	 case ANIM_V2_LOGO_NUM:
+	 case ANIM_V2_LOGO_NUM * 2: 
+	 	pcount = ANIM_V2_LOGO_NUM; 
+		break;
+    }
+
+    if(logo_order >= 1)
+    {
+        logo_offset = pcount;
+        RECT_REGION_T number_rect = {NUMBER_LEFT2, NUMBER_TOP2, NUMBER_RIGHT2, NUMBER_BOTTOM2};
+        RECT_REGION_T percent_rect = {PERCENT_LEFT2, PERCENT_TOP2, PERCENT_RIGHT2, PERCENT_BOTTOM2};
+        RECT_REGION_T capacity_rect = {CAPACITY_LEFT2, CAPACITY_TOP2, CAPACITY_RIGHT2, CAPACITY_BOTTOM2};
+        RECT_REGION_T top_rect = {TOP_ANIMATION_LEFT2, TOP_ANIMATION_TOP2, TOP_ANIMATION_RIGHT2, TOP_ANIMATION_BOTTOM2};
+        RECT_REGION_T old_rect = {BAR_LEFT2, BAR_TOP2, BAR_RIGHT2, BAR_BOTTOM2};        
+
+        //logo_offset = logonum;
+
+	 mt_disp_set_rect(logo_order, logo_offset, 
+		number_rect,
+		percent_rect,
+		capacity_rect,
+		top_rect,
+		old_rect);
+    }
+     /* end huangchao */
+
+    if (show_animationm_ver > 0)
+    {                 
         LOG_ANIM("[charging_animation: %s %d]pinfo[0]=0x%08x, pinfo[1]=0x%08x, pinfo[2]=%d\n", __FUNCTION__,__LINE__,
                     pinfo[0], pinfo[1], pinfo[2]);
                     
-        if ((show_animationm_ver == WIRELESS_CHARGING_ANIM_VER) && (pinfo[0] < ANIM_V2_LOGO_NUM))
+        if ((show_animationm_ver == WIRELESS_CHARGING_ANIM_VER) && (pcount < ANIM_V2_LOGO_NUM))
         {
             set_anim_version(1);
         }
-        if (pinfo[0] < ANIM_V1_LOGO_NUM)
+        if (pcount < ANIM_V1_LOGO_NUM)
         {
             kernel_logo_position = ANIM_V0_LOGO_NUM - 1;
             set_anim_version(0);
@@ -499,7 +566,11 @@ void anim_surface_deinit(void)
 void anim_show_logo(int index)
 { 
      LOG_ANIM("[charging_animation: %s %d]draw_anim_mode=%d, show  index =  %d\n",__FUNCTION__,__LINE__,draw_anim_mode,index);
- 
+
+     /* add by huangchao */
+     //index += logo_offset;
+     /* end huangchao */
+
      if (draw_anim_mode == (DRAW_ANIM_MODE_FB)) {
         anim_fb_addr_switch();
         fill_animation_logo(index, fb_addr, dec_logo_addr, logo_addr,phical_screen);

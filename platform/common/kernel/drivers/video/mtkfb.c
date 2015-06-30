@@ -200,6 +200,8 @@ static struct task_struct *esd_recovery_task = NULL;
 unsigned int lcd_fps = 6000;
 extern BOOL dal_shown;
 
+static struct mutex g_device_mutex;
+
 void mtkfb_pan_disp_test(void)
 {
     MTKFB_FUNC();
@@ -2133,6 +2135,39 @@ static struct fb_ops mtkfb_ops = {
     .fb_ioctl       = mtkfb_ioctl,
 };
 
+static ssize_t mtkfb_order_show(struct device *dev,
+					struct device_attribute *attr,
+					char *buf)
+{
+	unsigned int order;
+	
+	mutex_lock(&g_device_mutex);
+	order = DISP_GetScreenOrder();
+	sprintf(buf, "%d", order);
+	mutex_unlock(&g_device_mutex);
+
+	return strlen(buf) + 1;
+}
+
+static ssize_t mtkfb_order_store(struct device *dev,
+					struct device_attribute *attr,
+					const char *buf, size_t count)
+{	
+	return -EROFS;
+}
+
+static DEVICE_ATTR(mtkfb_order, S_IRUGO, mtkfb_order_show, mtkfb_order_store);
+
+/*add your attr in here*/
+static struct attribute *mtkfb_attributes[] = {
+	&dev_attr_mtkfb_order.attr,
+	NULL
+};
+
+static struct attribute_group mtkfb_attribute_group = {
+	.attrs = mtkfb_attributes
+};
+
 /*
  * ---------------------------------------------------------------------------
  * Sysfs interface
@@ -2141,14 +2176,29 @@ static struct fb_ops mtkfb_ops = {
 
 static int mtkfb_register_sysfs(struct mtkfb_device *fbdev)
 {
-    NOT_REFERENCED(fbdev);
+    //NOT_REFERENCED(fbdev);
+	/*add by huangchao*/
+	int err;
+	err = sysfs_create_group(&fbdev->dev->kobj, &mtkfb_attribute_group);
+	if (0 != err) 
+	{
+		dev_err(fbdev->dev,"%s() - ERROR: sysfs_create_group() failed.\n", __func__);
+		sysfs_remove_group(&fbdev->dev->kobj, &mtkfb_attribute_group);
+		return -EIO;
+	} 
 
-    return 0;
+	mutex_init(&g_device_mutex);
+	pr_info("mtkfb:%s - sysfs_create_group() succeeded.\n",__func__);
+	
+	return 0;
 }
 
 static void mtkfb_unregister_sysfs(struct mtkfb_device *fbdev)
 {
-    NOT_REFERENCED(fbdev);
+    //NOT_REFERENCED(fbdev);
+    /*add by huangchao*/
+    	sysfs_remove_group(&fbdev->dev->kobj, &mtkfb_attribute_group);
+	mutex_destroy(&g_device_mutex);
 }
 
 /*

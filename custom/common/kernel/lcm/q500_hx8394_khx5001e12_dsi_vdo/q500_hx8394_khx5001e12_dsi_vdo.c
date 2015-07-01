@@ -827,8 +827,8 @@ static unsigned int lcm_compare_id(void)
     	//mt_set_gpio_dir(GPIO126, GPIO_DIR_OUT);
 	//mt_set_gpio_out(GPIO126,1);
 
-	return (ret == 1)?1:0; 
-	//return 1; 
+	//return (ret == 1)?1:0; 
+	return 0; 
 #endif
 }
 

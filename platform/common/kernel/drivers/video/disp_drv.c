@@ -2473,6 +2473,8 @@ UINT32 DISP_GetScreenOrder(void)
         return 0;
     }
 }
+EXPORT_SYMBOL(DISP_GetScreenOrder);
+
 /* end huanchao */
 
 BOOL DISP_IsDirectLinkMode(void)

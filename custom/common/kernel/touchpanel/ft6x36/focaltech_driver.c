@@ -2363,7 +2363,8 @@ FOCAL_RESET_A3_REGISTER:
  static int __init tpd_driver_init(void) {
  	unsigned int ret = 0;
         printk("MediaTek fts touch panel driver init\n");
-	 ret = mt_get_gpio_in(GPIO17);
+	 //ret = mt_get_gpio_in(GPIO17);
+	ret = 0;
 	touch_id = 0;
 	 if(ret == 1)
 	 {

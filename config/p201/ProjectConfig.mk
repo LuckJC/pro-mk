@@ -83,7 +83,7 @@ CUSTOM_HAL_SUB_IMGSENSOR=
 CUSTOM_HAL_SUB_LENS=dummy_lens
 
 # accelerometer sensor to detect accelerometer from x y z axis.
-CUSTOM_KERNEL_ACCELEROMETER=
+CUSTOM_KERNEL_ACCELEROMETER=bma250
 #bma222E_auto mir3da_auto
 
 # ALSPS sensor driverto detect ambint light and the object is close or far awary from device

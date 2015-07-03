@@ -87,7 +87,7 @@ CUSTOM_KERNEL_ACCELEROMETER=bma250
 #bma222E_auto mir3da_auto
 
 # ALSPS sensor driverto detect ambint light and the object is close or far awary from device
-CUSTOM_KERNEL_ALSPS=em30713_auto tmd2771_auto 
+CUSTOM_KERNEL_ALSPS=empty #em30713_auto tmd2771_auto 
 
 # Pressure sensor driver to detect pressure
 CUSTOM_KERNEL_BAROMETER=
@@ -133,7 +133,7 @@ CUSTOM_KERNEL_LEDS=mt65xx
 CUSTOM_KERNEL_LENS=fm50af sensordrive dummy_lens
 
 # compass driver to detect compass raw data and report orientatino data
-CUSTOM_KERNEL_MAGNETOMETER=
+CUSTOM_KERNEL_MAGNETOMETER=yamaha532
 CUSTOM_KERNEL_MAIN2_BACKUP_IMGSENSOR=
 CUSTOM_KERNEL_MAIN2_IMGSENSOR=
 
@@ -355,8 +355,8 @@ MTK_AUTOIP_SUPPORT=no
 MTK_AUTORAMA_SUPPORT=yes
 
 # one load to support different accelerometer sensor
-MTK_AUTO_DETECT_ACCELEROMETER=yes
-MTK_AUTO_DETECT_ALSPS=yes
+MTK_AUTO_DETECT_ACCELEROMETER=no #yes
+MTK_AUTO_DETECT_ALSPS=no #yes
 
 # one load to support different magnetometer sensor
 MTK_AUTO_DETECT_MAGNETOMETER=no

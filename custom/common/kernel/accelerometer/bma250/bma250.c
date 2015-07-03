@@ -156,9 +156,9 @@ static char selftestRes[8]= {0};
 
 /*----------------------------------------------------------------------------*/
 #define GSE_TAG                  "[Gsensor] "
-#define GSE_FUN(f)               printk(KERN_INFO GSE_TAG"%s\n", __FUNCTION__)
+#define GSE_FUN(f)               printk(/*KERN_INFO*/ GSE_TAG"%s\n", __FUNCTION__)
 #define GSE_ERR(fmt, args...)    printk(KERN_ERR GSE_TAG"%s %d : "fmt, __FUNCTION__, __LINE__, ##args)
-#define GSE_LOG(fmt, args...)    printk(KERN_INFO GSE_TAG fmt, ##args)
+#define GSE_LOG(fmt, args...)    printk(/*KERN_INFO*/ GSE_TAG fmt, ##args)
 /*----------------------------------------------------------------------------*/
 static struct data_resolution bma250_data_resolution[1] = {
  /* combination by {FULL_RES,RANGE}*/
@@ -1167,6 +1167,7 @@ int gsensor_operate(void* self, uint32_t command, void* buff_in, int size_in,
 	switch (command)
 	{
 		case SENSOR_DELAY:
+			//GSE_LOG("SENSOR_DELAY\n");
 			if((buff_in == NULL) || (size_in < sizeof(int)))
 			{
 				GSE_ERR("Set delay parameter error!\n");
@@ -1213,6 +1214,7 @@ int gsensor_operate(void* self, uint32_t command, void* buff_in, int size_in,
 			break;
 
 		case SENSOR_ENABLE:
+			//GSE_LOG("SENSOR_ENABLE\n");
 			if((buff_in == NULL) || (size_in < sizeof(int)))
 			{
 				GSE_ERR("Enable sensor parameter error!\n");
@@ -1233,6 +1235,7 @@ int gsensor_operate(void* self, uint32_t command, void* buff_in, int size_in,
 			break;
 
 		case SENSOR_GET_DATA:
+			//GSE_LOG("SENSOR_GET_DATA\n");
 			if((buff_out == NULL) || (size_out< sizeof(hwm_sensor_data)))
 			{
 				GSE_ERR("get sensor data parameter error!\n");

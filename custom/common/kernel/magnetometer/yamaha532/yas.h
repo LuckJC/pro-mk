@@ -49,7 +49,7 @@ typedef unsigned int        uint32_t;
 /* -------------------------------------------------------------------------- */
 
 /* Debugging */
-#define DEBUG                               (0)
+#define DEBUG                               (1)
 
 #define MEDIATEK_CODE
 

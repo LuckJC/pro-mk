@@ -197,18 +197,13 @@ geomagnetic_i2c_read(uint8_t slave, uint8_t *buf, int len)
 #else
 
 static int
-geomagnetic_i2c_write(uint8_t slave, uint8_t addr, const uint8_t *buf, int len)
+geomagnetic_i2c_write(uint8_t addr, const uint8_t *buf, int len)
 {
-    uint8_t tmp[16];
+    int err;
+	
+    err = hwmsen_write_block(this_client, addr, buf, len);
 
-    if (sizeof(tmp) -1 < len) {
-        return -1;
-    }
-
-    tmp[0] = addr;
-    memcpy(&tmp[1], buf, len);
-
-    if (i2c_master_send(this_client, tmp, len + 1) < 0) {
+    if (err < 0) {
         return -1;
     }
 #if DEBUG
@@ -219,35 +214,13 @@ geomagnetic_i2c_write(uint8_t slave, uint8_t addr, const uint8_t *buf, int len)
 }
 
 static int
-geomagnetic_i2c_read(uint8_t slave, uint8_t addr, uint8_t *buf, int len)
+geomagnetic_i2c_read(uint8_t addr, uint8_t *buf, int len)
 {
     struct i2c_msg msg[2];
     int err;
 
-    msg[0].addr = slave;
-    msg[0].flags = 0;
-    msg[0].len = 1;
-    msg[0].buf = &addr;
-	msg[0].timing = 200;
-    msg[1].addr = slave;
-    msg[1].flags = I2C_M_RD;
-    msg[1].len = len;
-    msg[1].buf = buf;
-	msg[0].timing = 200;
-
-/*
-    err = i2c_transfer(this_client->adapter, msg, 2);
-    if (err != 2) {
-        dev_err(&this_client->dev,
-                "i2c_transfer() read error: slave_addr=%02x, reg_addr=%02x, err=%d\n", slave, addr, err);
-        return err;
-    }
-*/
-	this_client->addr = this_client->addr & I2C_MASK_FLAG;
-		//MSE_ERR("Sensor non-dma read timing is %x!\r\n", this_client->timing);
-//	buf[0]= addr;	
-//	err = i2c_master_recv(this_client, buf, len);
-	err = hwmsen_read_block(this_client, addr, buf, len);
+    this_client->addr &= I2C_MASK_FLAG;
+    err = hwmsen_read_block(this_client, addr, buf, len);
 
 
 #if DEBUG

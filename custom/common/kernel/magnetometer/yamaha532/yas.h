@@ -178,8 +178,8 @@ struct yas_mag_driver_callback {
     int (*device_write)(uint8_t slave, const uint8_t *buf, int len);
     int (*device_read)(uint8_t slave, uint8_t *buf, int len);
 #else
-    int (*device_write)(uint8_t slave, uint8_t addr, const uint8_t *buf, int len);
-    int (*device_read)(uint8_t slave, uint8_t addr, uint8_t *buf, int len);
+    int (*device_write)(uint8_t addr, const uint8_t *buf, int len);
+    int (*device_read)(uint8_t addr, uint8_t *buf, int len);
 #endif
     void (*msleep)(int msec);
     void (*current_time)(int32_t *sec, int32_t *msec);

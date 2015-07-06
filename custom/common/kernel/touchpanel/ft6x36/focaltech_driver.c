@@ -1705,7 +1705,7 @@ static void second_handler(unsigned long arg)
     	if(retval<0)
     	{
        	 printk("mtk_tpd[FTS] Read I2C error! driver NOt load!! CTP chip id is %d.\n",uc_reg_value);
-		return 0;
+		return -1;
 	}
 	
 	tpd_load_status = 1;

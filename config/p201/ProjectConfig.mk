@@ -68,7 +68,7 @@ CUSTOM_HAL_MAIN_IMGSENSOR=ov5693_mipi_raw
 CUSTOM_HAL_MAIN_LENS=ov8825af fm50af
 
 # M-sensor hal layer library including daemon
-CUSTOM_HAL_MSENSORLIB=mmc328x akm8975 ami304 yamaha530 mag3110 akmd8963 bmm050 mc6420 mmc3416x s62xd lsm303md hscdtd006 qmc5983 akmd09911 bmm056
+CUSTOM_HAL_MSENSORLIB=mmc328x akm8975 ami304 yamaha530 yamaha532 mag3110 akmd8963 bmm050 mc6420 mmc3416x s62xd lsm303md hscdtd006 qmc5983 akmd09911 bmm056
 
 # sensor hal layer common part
 CUSTOM_HAL_SENSORS=sensor
@@ -153,7 +153,7 @@ CUSTOM_KERNEL_MAIN_LENS=ov8825af fm50af
 CUSTOM_KERNEL_RTC=rtc
 
 # For audio kernel driver's speaker customization folder definition.
-CUSTOM_KERNEL_SOUND=amp_6323pmic_spk ##
+CUSTOM_KERNEL_SOUND=amp_lm49350 #amp_6323pmic_spk ##
 CUSTOM_KERNEL_SSW=ssw_single
 
 # lens driver config for video telephony camera (2nd solution)
@@ -341,7 +341,7 @@ MTK_AUDIO_CHANGE_SUPPORT=no
 
 # support Dolby DD+ audio playback
 MTK_AUDIO_DDPLUS_SUPPORT=no
-MTK_AUDIO_EXTCODEC_SUPPORT=no
+MTK_AUDIO_EXTCODEC_SUPPORT=yes
 MTK_AUDIO_HD_REC_SUPPORT=yes
 
 # yes  means use the mtk Audio Profiles

@@ -1583,10 +1583,10 @@ MTK_AGPS_APP=yes
 MTK_GPS_SUPPORT=yes
 
 # Specify HDMI external IC type.
-CUSTOM_KERNEL_HDMI=
+CUSTOM_KERNEL_HDMI=ep956
 
 # To control whether enable or disable HDMI feature. If choose yes,  phone's screen can be demonstrated on TV via HDMI cable.
-MTK_HDMI_SUPPORT=no
+MTK_HDMI_SUPPORT=yes
 
 # to choose which boot logo folder would be used, the boot logo folder path is mediatek/custom/common/uboot/logo/
 #lingjinming 2014 08 27

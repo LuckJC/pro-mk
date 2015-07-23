@@ -693,10 +693,12 @@ ssize_t AudioMTKStreamIn::read(void *buffer, ssize_t bytes)
     int RefillTryCount = 20;
 
 #ifndef EXTMD_LOOPBACK_TEST
+/*
     if ((mReadCount % 10) == 0)
     {
         ALOGD("AudioMTKStreamIn::read buffer = %p bytes = %d  this = %p", buffer, bytes, this);
     }
+*/
     mReadCount++;
 #ifdef SPEECH_PCM_VM_SUPPORT
     if (mSuspend)

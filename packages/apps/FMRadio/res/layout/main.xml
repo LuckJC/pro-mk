@@ -258,10 +258,10 @@
 		    android:visibility="invisible">
 		    
 		    <ImageButton android:id="@+id/volume_dec"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:src="@drawable/volume_decrease"
-		        android:background="@android:color/transparent"/>
+		        android:layout_width="60dp"
+		        android:layout_height="60dp"
+		        android:scaleType="fitXY"
+		        android:background="@drawable/volume_decrease"/>
 		 
 		 	<SeekBar android:id="@+id/volume_bar"
 			    android:layout_width="0dp"
@@ -272,11 +272,10 @@
 			    style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"/>
 		 
 		    <ImageButton android:id="@+id/volume_inc"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:src="@drawable/volume_increase" 
-		        android:background="@android:color/transparent"/>
-		    
+		        android:layout_width="62dp"
+		        android:layout_height="60dp"
+		        android:scaleType="fitXY"
+		        android:background="@drawable/volume_increase"/>
 		</LinearLayout>
     </FrameLayout>
 

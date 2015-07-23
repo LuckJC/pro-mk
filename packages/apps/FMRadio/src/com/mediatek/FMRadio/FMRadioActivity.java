@@ -58,6 +58,7 @@ import android.os.StatFs;
 import android.os.SystemClock;
 import android.os.Trace;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -364,6 +365,7 @@ public class FMRadioActivity extends Activity implements
     			
     		case R.id.sound:
     			showVolumeAdjustView();
+				adjustVolume(AudioManager.ADJUST_SAME);//#### added for viewinit correct volume
     			mAdjust = true;
     			break;
     			
@@ -2231,4 +2233,18 @@ public class FMRadioActivity extends Activity implements
         }
         mHandler.sendEmptyMessageDelayed(FMRadioListener.MSGID_REFRESH, oneSecond);
     }
+	 //####start added for physical menu-key related with screen munu action####
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+    	if(keyCode == KeyEvent.KEYCODE_MENU){
+    		refreshImageButton(false);
+            refreshActionMenuItem(false);
+            refreshPopupMenuItem(false);
+            refreshActionMenuPower(false);
+            
+    		enterChannelList();
+    	}
+    	return super.onKeyDown(keyCode, event);
+    }
+    //####end####
 }

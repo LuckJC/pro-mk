@@ -871,7 +871,7 @@ ssize_t AudioMTKStreamOut::write(const void *buffer, size_t bytes)
 #endif
     UpdateLine(__LINE__);
     mAudioResourceManager->DisableAudioLock(AudioResourceManagerInterface::AUDIO_STREAMOUT_LOCK);
-    ALOGD("AudioMTKStreamOut::write (-)");
+//    ALOGD("AudioMTKStreamOut::write (-)");
 
     return WrittenBytes;
 }

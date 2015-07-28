@@ -28,7 +28,7 @@ BUILD_PRELOADER=yes
 BUILD_UBOOT=no
 
 # User can input ASCII string which is showed in About phone and bootimg header.
-CUSTOM_BUILD_VERNO=X1_1.4_20150610
+CUSTOM_BUILD_VERNO=X1_1.8_20150725
 
 # it is used to decide MT6620 combo chip BT and WiFi antenna architecture.  The meaning of each value is defined as follows. Please note that "CUSTOM_HAL_ANT" setting must be consistent with customer's MT6620 antenna architecture layout. Improper setting may lead to BT/WiFi malfunctions
 CUSTOM_HAL_ANT=mt6582_ant_m1
@@ -1636,4 +1636,4 @@ MTK_WIFI_HOTSPOT_SUPPORT=yes
 MTK_WLAN_SUPPORT=yes
 
 #CREATE_PROJECT_INFO=2014051215934
-MTK_BUILD_VERNO = X1_1.6_20150706
+MTK_BUILD_VERNO = X1_1.6_20150723

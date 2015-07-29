@@ -182,7 +182,7 @@ android_audio_legacy::AudioStreamOut *AudioMTKStreamManager::openOutputStream(
     }
     if (*sampleRate == 0)
     {
-        *sampleRate = 44100;
+        *sampleRate = 44100;	/* huangchao */
     }
 
     ALOGD("openOutputStream, devices = 0x%x format=0x%x ,channels=0x%x, rate=%d", devices, *format, *channels, *sampleRate);

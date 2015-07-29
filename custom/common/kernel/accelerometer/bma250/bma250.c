@@ -492,7 +492,7 @@ static int BMA250_CheckDeviceID(struct i2c_client *client)
 	}
 	
 
-	if(databuf[0]!=BMA250_FIXED_DEVID)
+	if(databuf[0]!=BMA250_FIXED_DEVID && databuf[0]!= BMA250_FIXED_DEVID_1)
 	{
 		printk("BMA250_CheckDeviceID %d failt!\n ", databuf[0]);
 		return BMA250_ERR_IDENTIFICATION;

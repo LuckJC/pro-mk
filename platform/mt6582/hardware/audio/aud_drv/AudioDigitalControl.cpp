@@ -1239,7 +1239,7 @@ uint32 AudioDigitalControl::DlPolicyByDevice(uint32_t Device)
     }
     else
     {
-        return AudioDigitalType::I2S_OUT_DAC;
+        return AudioDigitalType::I2S_OUT_2;	/* huangchao return AudioDigitalType::I2S_OUT_DAC;*/
     }
 }
 

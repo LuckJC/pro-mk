@@ -28,7 +28,8 @@
 	 
 	 /* BMA222 Register Map  (Please refer to BMA150 Specifications) */
 	#define BMA250_REG_DEVID				0x00
-	#define BMA250_FIXED_DEVID			0xF9//0x03
+	#define BMA250_FIXED_DEVID			0x03
+	#define BMA250_FIXED_DEVID_1		0xF9//0x03
 	#define BMA250_REG_OFSX				0x16
 	#define BMA250_REG_OFSX_HIGH			0x1A
 	#define BMA250_REG_BW_RATE			0x10

@@ -28,7 +28,7 @@ BUILD_PRELOADER=yes
 BUILD_UBOOT=no
 
 # User can input ASCII string which is showed in About phone and bootimg header.
-CUSTOM_BUILD_VERNO=X1_1.8_20150725
+CUSTOM_BUILD_VERNO=X1_1.4_20150610
 
 # it is used to decide MT6620 combo chip BT and WiFi antenna architecture.  The meaning of each value is defined as follows. Please note that "CUSTOM_HAL_ANT" setting must be consistent with customer's MT6620 antenna architecture layout. Improper setting may lead to BT/WiFi malfunctions
 CUSTOM_HAL_ANT=mt6582_ant_m1
@@ -68,7 +68,7 @@ CUSTOM_HAL_MAIN_IMGSENSOR=ov5693_mipi_raw
 CUSTOM_HAL_MAIN_LENS=ov8825af fm50af
 
 # M-sensor hal layer library including daemon
-CUSTOM_HAL_MSENSORLIB=mmc328x akm8975 ami304 yamaha530 yamaha532 mag3110 akmd8963 bmm050 mc6420 mmc3416x s62xd lsm303md hscdtd006 qmc5983 akmd09911 bmm056
+CUSTOM_HAL_MSENSORLIB=mmc328x akm8975 ami304 yamaha530 mag3110 akmd8963 bmm050 mc6420 mmc3416x s62xd lsm303md hscdtd006 qmc5983 akmd09911 bmm056
 
 # sensor hal layer common part
 CUSTOM_HAL_SENSORS=sensor
@@ -153,7 +153,7 @@ CUSTOM_KERNEL_MAIN_LENS=ov8825af fm50af
 CUSTOM_KERNEL_RTC=rtc
 
 # For audio kernel driver's speaker customization folder definition.
-CUSTOM_KERNEL_SOUND=amp_lm49350 #amp_6323pmic_spk ##
+CUSTOM_KERNEL_SOUND=amp_6323pmic_spk ##
 CUSTOM_KERNEL_SSW=ssw_single
 
 # lens driver config for video telephony camera (2nd solution)
@@ -341,7 +341,7 @@ MTK_AUDIO_CHANGE_SUPPORT=no
 
 # support Dolby DD+ audio playback
 MTK_AUDIO_DDPLUS_SUPPORT=no
-MTK_AUDIO_EXTCODEC_SUPPORT=yes
+MTK_AUDIO_EXTCODEC_SUPPORT=no
 MTK_AUDIO_HD_REC_SUPPORT=yes
 
 # yes  means use the mtk Audio Profiles
@@ -1583,10 +1583,10 @@ MTK_AGPS_APP=yes
 MTK_GPS_SUPPORT=yes
 
 # Specify HDMI external IC type.
-CUSTOM_KERNEL_HDMI=ep956
+CUSTOM_KERNEL_HDMI=
 
 # To control whether enable or disable HDMI feature. If choose yes,  phone's screen can be demonstrated on TV via HDMI cable.
-MTK_HDMI_SUPPORT=yes
+MTK_HDMI_SUPPORT=no
 
 # to choose which boot logo folder would be used, the boot logo folder path is mediatek/custom/common/uboot/logo/
 #lingjinming 2014 08 27
@@ -1636,4 +1636,4 @@ MTK_WIFI_HOTSPOT_SUPPORT=yes
 MTK_WLAN_SUPPORT=yes
 
 #CREATE_PROJECT_INFO=2014051215934
-MTK_BUILD_VERNO = X1_1.6_20150723
+MTK_BUILD_VERNO = X1_1.6_20150706

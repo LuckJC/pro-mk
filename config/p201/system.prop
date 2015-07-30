@@ -58,7 +58,7 @@ ro.zygote.preload.enable=0
 #
 ro.btstack=blueangel
 
-persist.sys.timezone = Asia/Calcutta
+persist.sys.timezone = Asia/Shanghai
 ro.operator.optr=CUST
 
 ro.sf.lcd_density=160

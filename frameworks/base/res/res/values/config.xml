@@ -38,7 +38,7 @@
     <string name="config_mm_package_name">com.aspire.mm</string>
  
     <!-- default year for first power on-->
-    <integer name="default_restore_year">2013</integer>
+    <integer name="default_restore_year">2015</integer>
     
     <!-- Flag indicating whether ntp sync over mobile data connection -->
     <bool name="config_ntp_by_mobile">false</bool>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#B6B6B6"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tv_menu_my_favirate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:text="@string/my_favorite"
+        android:textColor="@android:color/black"
+        android:background="@drawable/tv_dialog_menu_item"
+        android:textSize="20sp" />
+	<View 
+	    android:layout_height="1dp"
+	    android:layout_width="match_parent"
+	    android:background="@android:color/darker_gray"
+	    android:layout_marginLeft="10dp"
+	    android:layout_marginRight="10dp"
+	    />
+    <TextView
+        android:id="@+id/tv_menu_quit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:text="@string/optmenu_exit"
+        android:background="@drawable/tv_dialog_menu_item"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
+
+</LinearLayout>

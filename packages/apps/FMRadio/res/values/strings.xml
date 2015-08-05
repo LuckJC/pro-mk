@@ -67,6 +67,8 @@
     <string name="optmenu_speaker">Speaker</string>
     <string name="optmenu_earphone">Earphone</string>
     <string name="not_available">Currently not available</string>
+    <string name="FM" translatable="false">FM</string>
+    <string name="my_favorite">My Favorite</string>
     
     <!-- For Em Rx -->
     <string name="FMR_Freq_text" translatable="false">Freq(MHz)</string>
@@ -108,4 +110,5 @@
     <string name="FMR_EM_CMD_title" translatable="false">CMD EXPAND</string>
     <string name="FMR_EM_CMD_return" translatable="false">CMD EXPAND RETURN VALUE</string>
     <string name="FMR_EM_DEFAULT_VALUE" translatable="false">0</string>
+    
 </resources>

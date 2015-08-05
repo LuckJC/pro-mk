@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/favorite_view"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent" 
+    android:background="@drawable/bg_main"
+    >
 
     <ListView
         android:id="@+id/station_list"
@@ -15,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/empty_list"
+        android:textColor="@android:color/black"
         android:visibility="gone"
         android:gravity="center"
         android:textSize="20sp"/>

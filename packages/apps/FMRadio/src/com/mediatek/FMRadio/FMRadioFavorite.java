@@ -44,6 +44,8 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -97,12 +99,15 @@ public class FMRadioFavorite extends Activity implements LoaderCallbacks<Cursor>
     
     private String mDlgStationName = null; // Record the long clicked station name.
     private int mDlgStationFreq = 0; // Record the long clicked station frequency..
-    private Context mContext = null; // application context
+    private static Context mContext = null; // application context
     
     IProjectStringExt mProjectStringExt = null;
 
     private OnExitListener mExitListener = null;
-
+    //##start## added by zhang
+    private boolean mFavList;
+    
+    //##end##
     /**
      * on create 
      * @param savedInstanceState save instance state
@@ -113,10 +118,12 @@ public class FMRadioFavorite extends Activity implements LoaderCallbacks<Cursor>
         // Bind the activity to FM audio stream.
         setVolumeControlStream(AudioManager.STREAM_FM);
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+        mFavList = getIntent().getBooleanExtra(FMRadioActivity.FAV_ENTRANCE, false);
         setContentView(R.layout.favorite);
         // display action bar and navigation button
         ActionBar actionBar = getActionBar();
         actionBar.setTitle(R.string.favorite_manager);
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#B6B6B6")));
         actionBar.setDisplayHomeAsUpEnabled(true);
         mContext = getApplicationContext();
         mProjectStringExt = ExtensionUtils.getExtension(mContext);
@@ -273,16 +280,33 @@ public class FMRadioFavorite extends Activity implements LoaderCallbacks<Cursor>
      */
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         Uri uri = FMRadioStation.Station.CONTENT_URI;
-        String select = FMRadioStation.Station.COLUMN_STATION_TYPE + " IN (?, ?)";
-        String order = FMRadioStation.Station.COLUMN_STATION_TYPE + "," + FMRadioStation.Station.COLUMN_STATION_FREQ;
-        CursorLoader cursorLoader = new CursorLoader(
-                this,
-                uri,
-                FMRadioStation.COLUMNS,
-                select,
-                new String[] { String.valueOf(FMRadioStation.STATION_TYPE_FAVORITE),
-                        String.valueOf(FMRadioStation.STATION_TYPE_SEARCHED) },
-                order);
+        //##start## modified by zhang: show diff content based on the entrance 
+        String select = null;
+        String order = null;
+        CursorLoader cursorLoader = null;
+        if(!mFavList){
+        	 select = FMRadioStation.Station.COLUMN_STATION_TYPE + " IN (?, ?)";
+             order = FMRadioStation.Station.COLUMN_STATION_TYPE + "," + FMRadioStation.Station.COLUMN_STATION_FREQ;
+             cursorLoader = new CursorLoader(
+                     this,
+                     uri,
+                     FMRadioStation.COLUMNS,
+                     select,
+                     new String[] { String.valueOf(FMRadioStation.STATION_TYPE_FAVORITE),
+                             String.valueOf(FMRadioStation.STATION_TYPE_SEARCHED) },
+                     order);
+        }else{
+        	select = FMRadioStation.Station.COLUMN_STATION_TYPE + " =?";
+        	order = FMRadioStation.Station.COLUMN_STATION_TYPE + "," + FMRadioStation.Station.COLUMN_STATION_FREQ;
+        	cursorLoader = new CursorLoader(
+        			this,
+        			uri,
+        			FMRadioStation.COLUMNS,
+        			select,
+        			new String[] { String.valueOf(FMRadioStation.STATION_TYPE_FAVORITE)},
+        			order);
+        }
+        //##end##
         return cursorLoader;
     }
 
@@ -371,7 +395,16 @@ public class FMRadioFavorite extends Activity implements LoaderCallbacks<Cursor>
             }
             viewHolder.mStationFreqView.setText(FMRadioUtils.formatStation(stationFreq));
             viewHolder.mStationNameView.setText(stationName);
+            //##start## added by zhang:highlight the current station item
+            viewHolder.mStationFreqView.setTextColor(Color.BLACK);
+        	viewHolder.mStationNameView.setTextColor(Color.BLACK);
+            if(FMRadioStation.getCurrentStation(mContext) == stationFreq){
+            	viewHolder.mStationFreqView.setTextColor(Color.BLUE);
+            	viewHolder.mStationNameView.setTextColor(Color.BLUE);
+            }
+            //##end##
         }
+        
     }
     
     /**

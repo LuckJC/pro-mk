@@ -19,4 +19,5 @@
         android:drawable="@drawable/btn_fm_overflow" />
     <item android:state_enabled="false"
         android:drawable="@drawable/btn_fm_overflow_disable" />
+	<item android:drawable="@drawable/btn_fm_overflow_disable" android:state_pressed="true"></item>
 </selector>

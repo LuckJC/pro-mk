@@ -3,14 +3,49 @@
     android:id="@+id/main_view"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@drawable/bg_main"
+ >
+
     <!-- middle part starts -->
+
+    <LinearLayout
+        android:id="@+id/ll_headpart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:background="#B6B6B6"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/ib_more_cus"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/btn_fm_overflow_selector" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/FM"
+            android:textColor="@android:color/black"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/ib_search_cus"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/btn_fm_search_selector" />
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/rl_middlepart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottombar_parent">
+        android:layout_below="@id/ll_headpart"
+        android:layout_above="@+id/bottombar_parent" >
 
         <TextView
             android:id="@+id/station_name"
@@ -31,6 +66,7 @@
             android:layout_toLeftOf="@+id/station_value"
             android:gravity="center_horizontal"
             android:textSize="20dip"
+            android:visibility="invisible"
             android:textStyle="bold" >
         </TextView>
 
@@ -40,19 +76,8 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center_horizontal"
-            android:textSize="60dip"
-            android:textStyle="bold" >
-        </TextView>
-
-        <TextView
-            android:id="@+id/text_mhz"
-            android:layout_width="80dip"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/station_value"
-            android:layout_below="@+id/station_name"
-            android:layout_toRightOf="@+id/station_value"
-            android:gravity="center_horizontal"
-            android:textSize="20dip"
+            android:textSize="40sp"
+            android:textColor="#0060C3"
             android:textStyle="bold" >
         </TextView>
 
@@ -70,18 +95,17 @@
             android:textStyle="bold" >
         </TextView>
 
-        <ImageButton
-            android:id="@+id/button_add_to_favorite"
-            android:layout_marginLeft="15dip"
-            android:layout_width="50dip"
-            android:layout_height="42dip"
-            android:layout_alignTop="@+id/text_mhz"
-            android:layout_toRightOf="@+id/station_value"
-            android:adjustViewBounds="true"
-            style="?android:attr/buttonBarButtonStyle"
-            android:src="@drawable/btn_fm_favorite_off" 
-            android:enabled="false">
-        </ImageButton>
+        <TextView
+            android:id="@+id/text_mhz"
+            android:layout_width="80dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_horizontal"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
     </RelativeLayout>
 
     <!-- middle part ends -->
@@ -90,14 +114,18 @@
         android:id="@+id/bottombar_parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/adjust_layout" >
-
+        android:layout_above="@+id/adjust_layout"
+        android:orientation="vertical" >
+		<com.mediatek.FMRadio.TuneWheel 
+		    android:id="@+id/tw_tune_value"
+		    android:layout_height="45dp"
+		    android:layout_width="match_parent"
+		    />
         <LinearLayout
             android:id="@+id/bottom_bar"
             android:layout_width="fill_parent"
-            android:layout_height="60dip"
+            android:layout_height="50dip"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/bottom_bar"
             android:gravity="center_vertical"
             android:splitMotionEvents="false"
             android:weightSum="4" >
@@ -107,45 +135,56 @@
 
             <ImageButton
                 android:id="@+id/button_prevstation"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                style="?android:attr/buttonBarButtonStyle"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:src="@drawable/btn_fm_previous" 
-                android:enabled="false"/>
+                android:enabled="false"
+                android:background="@drawable/tv_dialog_menu_item"
+                android:src="@drawable/btn_fm_previous" />
 
             <ImageButton
                 android:id="@+id/button_decrease"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
-                style="?android:attr/buttonBarButtonStyle"
-                android:src="@drawable/btn_fm_decrease_frequency"
-                android:enabled="false" />
+                android:enabled="false"
+                android:background="@drawable/tv_dialog_menu_item"
+                android:src="@drawable/btn_fm_decrease_frequency" />
 
             <ImageButton
                 android:id="@+id/button_increase"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
-                style="?android:attr/buttonBarButtonStyle"
-                android:src="@drawable/btn_fm_increase_frequency"
-                android:enabled="false" />
+                android:enabled="false"
+                android:background="@drawable/tv_dialog_menu_item"
+                android:src="@drawable/btn_fm_increase_frequency" />
 
             <ImageButton
                 android:id="@+id/button_nextstation"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
-                style="?android:attr/buttonBarButtonStyle"
-                android:src="@drawable/btn_fm_next" 
-                android:enabled="false" />
+                android:enabled="false"
+                android:background="@drawable/tv_dialog_menu_item"
+                android:src="@drawable/btn_fm_next" />
         </LinearLayout>
-
+		<ImageButton
+		    android:layout_margin="5dp"
+		    android:id="@+id/ib_power_cus" 
+		    android:layout_height="40dp"
+		    android:layout_width="40dp"
+		    android:background="@drawable/btn_fm_powerup_selector"
+		    android:layout_gravity="center_horizontal"
+		    />
         <LinearLayout
             android:id="@+id/bottom_bar_recorder"
             android:layout_width="match_parent"
@@ -153,8 +192,8 @@
             android:layout_alignParentBottom="true"
             android:background="@drawable/bottom_bar"
             android:gravity="center_vertical"
-            android:visibility="gone"
             android:splitMotionEvents="false"
+            android:visibility="gone"
             android:weightSum="3" >
 
             <!-- Must set the background to "btn_pressed" which is the same with what is set in source code. -->
@@ -162,30 +201,30 @@
 
             <ImageButton
                 android:id="@+id/btn_record"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="?android:attr/buttonBarButtonStyle"
-                android:src="@drawable/btn_fm_record" 
-                android:enabled="false"/>
+                android:enabled="false"
+                android:src="@drawable/btn_fm_record" />
 
             <ImageButton
                 android:id="@+id/btn_stop"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="?android:attr/buttonBarButtonStyle"
-                android:src="@drawable/btn_fm_rec_stop" 
-                android:enabled="false"/>
+                android:enabled="false"
+                android:src="@drawable/btn_fm_rec_stop" />
 
             <ImageButton
                 android:id="@+id/btn_playback"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                style="?android:attr/buttonBarButtonStyle"
-                android:src="@drawable/btn_fm_rec_play" 
-                android:enabled="false"/>
+                android:enabled="false"
+                android:src="@drawable/btn_fm_rec_play" />
         </LinearLayout>
     </LinearLayout>
 
@@ -221,7 +260,7 @@
             android:layout_marginLeft="20dip"
             android:textColor="#ffffff"
             android:textSize="20sp"
-            android:textStyle="normal">
+            android:textStyle="normal" >
         </TextView>
     </RelativeLayout>
 
@@ -238,45 +277,64 @@
             android:src="@drawable/fm_anim"
             android:visibility="invisible" />
     </LinearLayout>
-    
-    <FrameLayout android:id="@+id/adjust_layout"
+
+    <FrameLayout
+        android:id="@+id/adjust_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-        <ImageButton android:id="@+id/sound"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:src="@drawable/sound"
-	        android:layout_gravity="center_vertical"/>
-	    <LinearLayout android:id="@+id/adjust_volume"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		    android:layout_gravity="center_vertical"
-		    android:gravity="center_vertical"
-		    android:orientation="horizontal"
-		    android:background="@drawable/volume_bg"
-		    android:visibility="invisible">
-		    
-		    <ImageButton android:id="@+id/volume_dec"
-		        android:layout_width="60dp"
-		        android:layout_height="60dp"
-		        android:scaleType="fitXY"
-		        android:background="@drawable/volume_decrease"/>
-		 
-		 	<SeekBar android:id="@+id/volume_bar"
-			    android:layout_width="0dp"
-			    android:layout_height="wrap_content"
-			    android:layout_weight="1"
-			    android:progress="20"
-			    android:max="100"
-			    style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"/>
-		 
-		    <ImageButton android:id="@+id/volume_inc"
-		        android:layout_width="62dp"
-		        android:layout_height="60dp"
-		        android:scaleType="fitXY"
-		        android:background="@drawable/volume_increase"/>
-		</LinearLayout>
+        android:layout_alignParentBottom="true" >
+
+        <ImageButton
+            android:id="@+id/sound"
+            android:layout_gravity="center_vertical"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:adjustViewBounds="true"
+            android:src="@drawable/sound" />
+		<ImageButton
+            android:id="@+id/button_add_to_favorite"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:adjustViewBounds="true"
+            android:layout_gravity="right|center_vertical"
+            android:enabled="false"
+            android:src="@drawable/btn_fm_favorite_off" />
+        <LinearLayout
+            android:id="@+id/adjust_volume"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/volume_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="invisible" >
+
+            <ImageButton
+                android:id="@+id/volume_dec"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/volume_decrease"
+                android:scaleType="fitXY" />
+
+            <SeekBar
+                android:id="@+id/volume_bar"
+                style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:max="100"
+                android:progress="20" />
+
+            <ImageButton
+                android:id="@+id/volume_inc"
+                android:layout_width="62dp"
+                android:layout_height="60dp"
+                android:background="@drawable/volume_increase"
+                android:scaleType="fitXY" />
+        </LinearLayout>
+
     </FrameLayout>
 
 </RelativeLayout>

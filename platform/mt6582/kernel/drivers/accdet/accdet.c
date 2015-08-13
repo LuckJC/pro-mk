@@ -10,6 +10,8 @@
 #define SW_WORK_AROUND_ACCDET_REMOTE_BUTTON_ISSUE
 #define DEBUG_THREAD 1
 
+static struct timer_list s_timer;
+
 /*----------------------------------------------------------------------
 static variable defination
 ----------------------------------------------------------------------*/
@@ -501,20 +503,22 @@ static inline int accdet_setup_eint(void)
 
 #endif//endif ACCDET_EINT
 
+static void moto_stop_handler(unsigned long arg)
+{
+    mt_set_gpio_out(GPIO20, 0);
+
+    printk(KERN_INFO "stop moto\n", jiffies);
+}
+
 
 static void accdet_eint_funcEx(void)
 {
    //KE under fastly plug in and plug out
     mt_eint_mask(CUST_EINT_ACCDET_NUM);
 
-     if(motor_status == 0)
-     	{
-     	   motor_status = 1;
-          mt_set_gpio_out(GPIO20,1);
-     	}else{
-     	   motor_status = 0;
-	    mt_set_gpio_out(GPIO20,0);
-     	}
+    mt_set_gpio_out(GPIO20,1);
+
+    mod_timer(&s_timer, jiffies + HZ * 6);
 
     mt_eint_unmask(CUST_EINT_ACCDET_NUM);
 }
@@ -531,7 +535,7 @@ static inline int accdet_setup_eintEx(void)
     //mt_set_gpio_pull_select(GPIO_ACCDET_EINT_PIN, GPIO_PULL_UP);
 
 	mt_eint_set_hw_debounce(CUST_EINT_ACCDET_NUM, CUST_EINT_ACCDET_DEBOUNCE_CN);
-	mt_eint_registration(CUST_EINT_ACCDET_NUM, CUST_EINT_ACCDET_TYPE, accdet_eint_funcEx, 0);
+	mt_eint_registration(CUST_EINT_ACCDET_NUM, CUST_EINTF_TRIGGER_FALLING/*CUST_EINT_ACCDET_TYPE*/, accdet_eint_funcEx, 0);
 	ACCDET_DEBUG("[Accdet]accdet set EINT finished, accdet_eint_num=%d, accdet_eint_debounce_en=%d, accdet_eint_polarity=%d\n", CUST_EINT_ACCDET_NUM, CUST_EINT_ACCDET_DEBOUNCE_EN, CUST_EINT_ACCDET_TYPE);
 
  //     if(mt_get_gpio_in(GPIO_ACCDET_EINT_PIN) == 1)
@@ -1663,6 +1667,13 @@ int mt_accdet_probe(void)
 		mt_set_gpio_pull_select(GPIO20, GPIO_PULL_UP);
 
 	       mt_set_gpio_out(GPIO20,0);
+
+            /*1. 初始化定时器*/
+            init_timer(&s_timer);
+            s_timer.function = moto_stop_handler;
+            s_timer.expires = jiffies + HZ;
+            /*2.  添加一个内核定时器*/
+            add_timer(&s_timer);
 
               accdet_setup_eintEx();
 	   
